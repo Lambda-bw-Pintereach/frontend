@@ -3,17 +3,16 @@ import LoginContainer from "./Login.style"
 const Login = props => {
 	return (
 		<LoginContainer>
-			<label>username
-				<input type="text" />
-			</label>
+			<label>username</label>
+			<input type="text" />
 
-			<label>password
-				<input type="password" />
-			</label>
+			<label>password</label>
+
+			<input type="password" />
 
 			<div className="login-buttons">
-				<button>SIGN UP</button>
-				<button>LOG IN</button>
+				<button className="button-orange">SIGN UP</button>
+				<button className="button-blue">LOG IN</button>
 			</div>
 		</LoginContainer>
 	)
