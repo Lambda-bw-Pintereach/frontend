@@ -14,7 +14,7 @@ const Login = () => {
     }
 
     const handleChange = (e) => {
-        setUserInformation({
+        setUserInfo({
           ...userInfo,
           [e.target.name]: e.target.value
         })
