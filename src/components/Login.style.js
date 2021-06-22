@@ -7,18 +7,18 @@ const LoginContainer = styled.div`
 	label {
 		display: block;
 		position: relative;
-		top: 1.2em;
+		top: 1.2rem;
 		left: 10px;
 		color: #adbfcf;
-		font-size: 1.1em;
+		font-size: 1rem;
 	}
 
 	input {
 		display: block;
-		height: 2.5em;
-		width: 15em;
-		font-size: 1.5em;
-		padding: .8em .5em 0em;
+		height: 2.5rem;
+		width: 15rem;
+		font-size: 1.5rem;
+		padding: 1rem .5rem .1rem;
 		background-color: #444;
 		border: 0;
 		border-radius: 8px 8px 0px 0px;

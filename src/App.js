@@ -5,6 +5,8 @@ import AddArticle from './components/AddArticle';
 import Signup from './components/Signup';
 import { AppContainer, Landing } from './App.style';
 import Login from './components/Login';
+import PrivateRoute from './components/PrivateRoute';
+import Dash from './components/Dash';
 
 function App() {
   return (
@@ -26,9 +28,13 @@ function App() {
         <Route path='/addarticle'>
           <AddArticle />
         </Route>
+
         <Route path='/signup'>
           <Signup />
         </Route>
+
+        <PrivateRoute path='/dash' component={Dash} />
+
       </Switch>
     </AppContainer>
   );

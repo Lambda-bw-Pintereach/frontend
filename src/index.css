@@ -1,5 +1,5 @@
 * {
-  box-sizing: border-box;
+  /* box-sizing: border-box; */
 }
 
 body {
@@ -12,6 +12,14 @@ body {
   -moz-osx-font-smoothing: grayscale;
 
   min-height: 100vh;
+
+  font-size: 18px;
+}
+
+@media only screen and (max-width: 600px) {
+  body {
+    font-size: 12px;
+  }
 }
 
 code {
