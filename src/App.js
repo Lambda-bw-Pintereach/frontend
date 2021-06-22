@@ -1,6 +1,8 @@
-import logo from './logo.svg';
 import './App.css';
+import React from 'react';
+import { Route, Switch } from "react-router-dom";
 import AddArticle from './components/AddArticle';
+import Signup from './components/Signup';
 
 function App() {
   return (
@@ -8,9 +10,14 @@ function App() {
       <header className="App-header">
         Pintereach
       </header>
-
-      <AddArticle />
-
+      <Switch>
+        <Route path='/addarticle'>
+          <AddArticle />
+        </Route>
+        <Route path='/signup'>
+          <Signup />
+        </Route>
+      </Switch>
     </div>
   );
 }
