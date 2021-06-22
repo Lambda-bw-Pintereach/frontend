@@ -59,7 +59,7 @@ const LinkPreviewCard = props => {
 }
 
 const ArticlePreviewContainer = styled.div`
-	width: 40em;
+	width: 45em;
 	background-color: #00000022;
 	border: 2px black solid;
 	display: flex;
@@ -68,7 +68,7 @@ const ArticlePreviewContainer = styled.div`
 	text-align: left;
 
 	.article-prev-image {
-		width: 200px;
+		width: 240px;
 		height: 200px;
 		flex-shrink: 0;
 		margin: .2em;
