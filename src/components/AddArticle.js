@@ -8,7 +8,7 @@ const emptyFormValues = {
 	category: [],
 }
 
-const categories = [
+export const categories = [
 	"tech",
 	"politics",
 	"entertainment",

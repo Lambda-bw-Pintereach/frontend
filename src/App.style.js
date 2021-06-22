@@ -5,7 +5,7 @@ export const AppContainer = styled.div`
 	h1 {
 		font-family: 'Padauk', sans-serif;
 		color: #f0f0f0;
-		font-size: 6em;
+		font-size: 5rem;
 		margin: 0;
 		font-weight: 400;
 		line-height: 1;
@@ -14,7 +14,7 @@ export const AppContainer = styled.div`
 	h2 {
 		font-family: 'Padauk', sans-serif;
 		color: #f0f0f0;
-		font-size: 1.8em;
+		font-size: 1.6rem;
 		margin: 0;
 		font-weight: 400;
 		line-height: 1;
@@ -23,33 +23,36 @@ export const AppContainer = styled.div`
 	button {
 		display: inline;
 		border: 0;
-		font-size: 2em;
-		padding: .2em .5em;
-		margin: .8em .3em;
+		font-size: 1.6rem;
+		padding: .2rem .5rem;
+		margin: .8rem .3rem;
 	}
 
 	.button-orange {
-		background-color: #c96a37;
+		background-color: ${p => p.theme.secondaryColor};
+		color: #000000bb;
 	}
 
 	.button-orange:hover {
-		background-color: #d4845b;
+		background-color: ${p => p.theme.secondaryHigh};
+		color: #000000dd;
 	}
 
 	.button-orange:active {
-		background-color: #e4946b;
+		background-color: ${p => p.theme.secondaryHigher};
+		color: #000000;
 	}
 
 	.button-blue {
-		background-color: #579fd9;
+		background-color: ${p => p.theme.primaryColor};
 	}
 
 	.button-blue:hover {
-		background-color: #77aff9;
+		background-color: ${p => p.theme.primaryHigher};
 	}
 
 	.button-blue:active {
-		background-color: #87bff9;
+		background-color: ${p => p.theme.primaryHigh};
 	}
 `;
 
