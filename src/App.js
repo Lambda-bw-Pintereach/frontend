@@ -3,14 +3,25 @@ import React from 'react';
 import { Route, Switch } from "react-router-dom";
 import AddArticle from './components/AddArticle';
 import Signup from './components/Signup';
+import { AppContainer, Landing } from './App.style';
+import Login from './components/Login';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
+    <AppContainer>
+      {/* <header className="App-header">
         Pintereach
-      </header>
+      </header> */}
+
       <Switch>
+        <Route path="/" exact>
+          <Landing>
+            <h1>pintereach</h1>
+            <h2>collect your [...]</h2>
+            <Login />
+          </Landing>
+        </Route>
+
         <Route path='/addarticle'>
           <AddArticle />
         </Route>
@@ -18,7 +29,7 @@ function App() {
           <Signup />
         </Route>
       </Switch>
-    </div>
+    </AppContainer>
   );
 }
 
