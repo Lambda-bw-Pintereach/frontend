@@ -75,19 +75,16 @@ const AddArticle = props => {
 							);
 						})}
 					</div>
-
 					<div>
 						<input type="submit" value="Submit" />
 					</div>
 				</form>
 			</AddArticleContainer>
-
 			<div>
 				{JSON.stringify(formValues)}
 			</div>
 		</>
 	);
-
 }
 
 const AddArticleContainer = styled.div`
