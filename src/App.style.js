@@ -54,6 +54,17 @@ export const AppContainer = styled.div`
 `;
 
 export const Landing = styled.div`
+
+	.landing-background {
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		background: linear-gradient(#0f1322, #0b070f);
+		z-index: -1;
+	}
+
 	margin: auto;
 	height: 80vh;
 

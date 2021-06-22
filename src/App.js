@@ -16,6 +16,7 @@ function App() {
       <Switch>
         <Route path="/" exact>
           <Landing>
+            <div className="landing-background"></div>
             <h1>pintereach</h1>
             <h2>collect your [...]</h2>
             <Login />
