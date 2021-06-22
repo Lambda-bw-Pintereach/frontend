@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import AddArticleStyle from './AddArticle.style';
+import AddArticleContainer from './AddArticle.style';
 
 const emptyFormValues = {
 	title: "",
@@ -48,7 +48,7 @@ const AddArticle = props => {
 
 	return (
 		<>
-			<AddArticleStyle>
+			<AddArticleContainer>
 				<h3>Add Article</h3>
 				<form>
 					<label>
@@ -80,7 +80,7 @@ const AddArticle = props => {
 						<input type="submit" value="Submit" />
 					</div>
 				</form>
-			</AddArticleStyle>
+			</AddArticleContainer>
 
 			<div>
 				{JSON.stringify(formValues)}
