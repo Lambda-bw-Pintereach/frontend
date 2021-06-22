@@ -13,6 +13,13 @@ const Login = () => {
         setError('Username and Password are Required.')
     }
 
+    const handleChange = (e) => {
+        setUserInformation({
+          ...userInfo,
+          [e.target.name]: e.target.value
+        })
+      }
+
 
     return (
         <div>
@@ -24,8 +31,8 @@ const Login = () => {
                     name='Username'
                     placeholder='Username'
                     type='text'
-                    onChange
-                    value
+                    onChange={handleChange}
+                    value={userInfo.username}
                     />
                     <br/>
                     <br/>
@@ -33,8 +40,8 @@ const Login = () => {
                     name='Password'
                     placeholder='Password'
                     type='Password'
-                    onChange
-                    value
+                    onChange={handleChange}
+                    value={userInfo.password}
                   />  
                     <button>Login for the Best Articles!</button>
                 </form>
