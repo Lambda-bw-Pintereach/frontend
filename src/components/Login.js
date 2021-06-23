@@ -16,20 +16,23 @@ const Login = () => {
 	const [userLogin, setUserLogin] = useState(credentials)
 
 	const handleChange = e => {
-		setUserLogin({
-			userLogin: {
+		setUserLogin({ 
 				...userLogin,
 				[e.target.name]: e.target.value
-			}
 		});
 	};
 
 	const login = e => {
 		e.preventDefault();
-		axios.post('https://lambda-ft-pintereach-05.herokuapp.com/api/auth/login', userLogin)
+		const newUser = {
+			username: userLogin.username,
+			password: userLogin.password,
+		  }
+		axios.post('https://lambda-ft-pintereach-05.herokuapp.com/api/auth/login', newUser)
 			.then(res => {
 				localStorage.setItem("token", res.data.token);
 				push('/dash');
+				console.log(res)
 			})
 			.catch(err => {
 				console.log(err);

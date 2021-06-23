@@ -57,7 +57,7 @@ const Signup = () => {
     axios.post('https://lambda-ft-pintereach-05.herokuapp.com/api/auth/register', newUser)
       .then(res => {
         console.log(res)
-        push('/login')
+        push('/')
       })
       .catch(err => {
         console.log(err)
