@@ -52,7 +52,7 @@ const ArticleList = props => {
 				{articles.map((art, i) => {
 					return (
 						<div className="dash-article-card" key={i}>
-							<a href={`/dash/article/${art.id}`}>
+							<a href={`/dash/article/${art.article_id}`}>
 								<h5>{art.title}</h5>
 							</a>
 							<p>{art.preview}</p>
