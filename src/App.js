@@ -7,6 +7,7 @@ import { AppContainer, Landing } from './App.style';
 import Login from './components/Login';
 import PrivateRoute from './components/PrivateRoute';
 import Dash from './components/Dash';
+import ArticleList from './components/ArticleList';
 
 function App() {
   return (
@@ -16,17 +17,16 @@ function App() {
       </header> */}
 
       <Switch>
-        
 
-        <Route path='/addarticle'>
-          <AddArticle />
-        </Route>
 
         <Route path='/signup'>
           <Signup />
         </Route>
 
-        <PrivateRoute path='/dash' component={Dash} />
+        <PrivateRoute path='/dash'>
+          <Dash/>
+        </PrivateRoute>
+
         <Route path="/" exact>
           <Landing>
             <div className="landing-background"></div>
