@@ -38,7 +38,7 @@ const Dash = (props) => {
 				<nav>
 					<Link to="/dash">home</Link>
 					<Link to="/dash/addarticle">save article</Link>
-					<Link onClick={logOut}>log out</Link>
+					<Link to="/" onClick={logOut}>log out</Link>
 				</nav>
 			</div>
 

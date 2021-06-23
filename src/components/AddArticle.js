@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
+import { addArticle } from '../api';
 import AddArticleContainer from './AddArticle.style';
 
 const emptyFormValues = {
@@ -26,6 +28,7 @@ export const categories = [
 const AddArticle = props => {
 
 	const [formValues, setFormValues] = useState(emptyFormValues);
+	const history = useHistory();
 
 	const handleChange = (e) => {
 		const updFormValues = {
@@ -46,11 +49,28 @@ const AddArticle = props => {
 			setFormValues({ ...formValues, category: [...category, categoryName] });
 	}
 
+	// {
+	// 	"title": "new article",
+	// 		"preview": "This is testing",
+	// 			"story": "This testing is good",
+	// 				"category": "fashion"
+	// }
+	const handleSubmit = e => {
+		e.preventDefault();
+
+		addArticle(formValues)
+			.then(res => {
+				console.log(res);
+				history.push('/dash')
+			})
+			.catch(err => console.log(err));
+	}
+
 	return (
 		<>
 			<AddArticleContainer>
 				<h3>Add Article</h3>
-				<form>
+				<form onSubmit={handleSubmit}>
 					<label>
 						<span>Title</span>
 						<input name="title" type="text" value={formValues.title} onChange={handleChange} />
@@ -66,10 +86,10 @@ const AddArticle = props => {
 
 					<span>Categories:</span>
 					<div className="cat-list">
-						{categories.map((cat) => {
+						{categories.map((cat,i) => {
 							return (
-								<label>
-									<input name={`cat-${cat}`} type="checkbox" checked={formValues.category.includes(cat)} onChange={handleCheck} />
+								<label key={i}>
+									<input name={`cat-${cat}`} type="checkbox" checked={formValues.category.includes(cat)} onChange={handleCheck}/>
 									{cat}
 								</label>
 							);

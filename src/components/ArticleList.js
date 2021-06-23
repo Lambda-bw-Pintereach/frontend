@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useRouteMatch } from 'react-router-dom';
+import { fetchArticles } from '../api';
 import { categories } from './AddArticle';
 
 const articles = [{
@@ -24,7 +25,17 @@ const articles = [{
 }]
 
 const ArticleList = props => {
-	console.log(useRouteMatch())
+	const [articles, setArticles] = useState([]);
+
+	useEffect(() => {
+		fetchArticles()
+			.then(res => {
+				console.log(res);
+			})
+			.catch(err => console.log);
+	})
+
+
 	return (
 		<>
 			<div className="dash-section-header">
