@@ -80,9 +80,6 @@ const AddArticle = props => {
 					</div>
 				</form>
 			</AddArticleContainer>
-			<div>
-				{JSON.stringify(formValues)}
-			</div>
 		</>
 	);
 }
