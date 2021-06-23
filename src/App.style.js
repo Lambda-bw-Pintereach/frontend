@@ -20,38 +20,39 @@ export const AppContainer = styled.div`
 		line-height: 1;
 	}
 
-	button {
+	.btn {
 		display: inline;
 		border: 0;
 		font-size: 1.6rem;
-		padding: .2rem .5rem;
+		padding: .4rem .5rem;
 		margin: .8rem .3rem;
+		text-decoration: none !important;
 	}
 
-	.button-orange {
+	.btn-orange {
 		background-color: ${p => p.theme.secondaryColor};
 		color: #000000bb;
 	}
 
-	.button-orange:hover {
+	.btn-orange:hover {
 		background-color: ${p => p.theme.secondaryHigh};
 		color: #000000dd;
 	}
 
-	.button-orange:active {
+	.btn-orange:active {
 		background-color: ${p => p.theme.secondaryHigher};
 		color: #000000;
 	}
 
-	.button-blue {
+	.btn-blue {
 		background-color: ${p => p.theme.primaryColor};
 	}
 
-	.button-blue:hover {
+	.btn-blue:hover {
 		background-color: ${p => p.theme.primaryHigher};
 	}
 
-	.button-blue:active {
+	.btn-blue:active {
 		background-color: ${p => p.theme.primaryHigh};
 	}
 `;

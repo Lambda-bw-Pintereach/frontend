@@ -5,6 +5,7 @@ import AddArticle, { categories } from './AddArticle';
 import DashContainer from './Dash.style';
 import { axiosWithAuth } from '../utils/axiosWithAuth'
 import ArticleList from './ArticleList';
+import Article from './Article';
 
 
 
@@ -48,10 +49,13 @@ const Dash = (props) => {
 						<ArticleList />
 					</Route>
 
-					<Route path='/dash/addarticle'>
+					<Route path='/dash/addarticle' exact>
 						<AddArticle />
 					</Route>
 
+					<Route path='/dash/article/:id' exact>
+						<Article/>
+					</Route>
 				</Switch>
 			</div>
 

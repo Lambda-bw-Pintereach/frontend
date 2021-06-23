@@ -13,7 +13,8 @@ const theme = {
 
 	darkBackground: 				"#0f1322",
 	darkBackgroundGradient: "#0b070f",
-	onDark: "#f0f0f0",
+   onDark: "#f0f0f0",
+   errorOnDark: "#FF8855",
 
 	lightBackground: "#dddddd",
 	onLight: "#222222",
