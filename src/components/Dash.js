@@ -1,14 +1,11 @@
 import React from 'react';
-import { Link, Route, Switch, useHistory, useParams, useRouteMatch } from 'react-router-dom';
-import styled from 'styled-components';
-import AddArticle, { categories } from './AddArticle';
+import { Link, Route, Switch, useHistory } from 'react-router-dom';
+
 import DashContainer from './Dash.style';
-import { axiosWithAuth } from '../utils/axiosWithAuth'
+
+import AddArticle from './AddArticle';
 import ArticleList from './ArticleList';
 import Article from './Article';
-
-
-
 
 
 const Dash = (props) => {
@@ -42,9 +39,9 @@ const Dash = (props) => {
 				</nav>
 			</div>
 
-
 			<div className="dash-content">
 				<Switch>
+
 					<Route path='/dash' exact>
 						<ArticleList />
 					</Route>
@@ -56,9 +53,9 @@ const Dash = (props) => {
 					<Route path='/dash/article/:id' exact>
 						<Article/>
 					</Route>
+
 				</Switch>
 			</div>
-
 
 		</DashContainer>
 	)
