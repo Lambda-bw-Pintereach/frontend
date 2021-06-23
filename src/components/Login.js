@@ -188,7 +188,7 @@ const Login = () => {
 								<button className="btn btn-blue" onClick={onLoginClick} default>Login</button>}
 
 							{isSigningUp &&
-								<button className="btn btn-blue" onClick={onCancelClick}>Cancel</button>
+								<button className="btn btn-red" onClick={onCancelClick}>Cancel</button>
 							}
 
 							<button className="btn btn-orange" onClick={onSignUpClick} disabled={isSigningUp && disabled}>Sign up</button>

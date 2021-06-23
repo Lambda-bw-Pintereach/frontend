@@ -29,6 +29,10 @@ export const AppContainer = styled.div`
 		text-decoration: none !important;
 	}
 
+	/* .btn:disabled {
+		opacity: 75%;
+	} */
+
 	.btn-orange {
 		background-color: ${p => p.theme.secondaryColor};
 		color: #000000bb;
@@ -44,6 +48,11 @@ export const AppContainer = styled.div`
 		color: #000000;
 	}
 
+	.btn-orange:disabled {
+		background-color: ${p => p.theme.secondaryLower} !important;
+		color: #000000bb !important;
+	}
+
 	.btn-blue {
 		background-color: ${p => p.theme.primaryColor};
 	}
@@ -54,6 +63,18 @@ export const AppContainer = styled.div`
 
 	.btn-blue:active {
 		background-color: ${p => p.theme.primaryHigh};
+	}
+
+	.btn-red {
+		background-color: ${p => p.theme.redColor};
+	}
+
+	.btn-red:hover {
+		background-color: ${p => p.theme.redHigher};
+	}
+
+	.btn-red:active {
+		background-color: ${p => p.theme.redHigh};
 	}
 `;
 
