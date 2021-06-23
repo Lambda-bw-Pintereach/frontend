@@ -17,24 +17,21 @@ function App() {
       </header> */}
 
       <Switch>
-
+        <PrivateRoute path='/dash'>
+          <Dash />
+        </PrivateRoute>
 
         <Route path='/signup'>
           <Signup />
         </Route>
 
-        <PrivateRoute path='/dash'>
-          <Dash/>
-        </PrivateRoute>
+        <Landing>
+          <div className="landing-background"></div>
+          <h1>pintereach</h1>
+          <h2>collect your [...]</h2>
+          <Login />
+        </Landing>
 
-        <Route path="/" exact>
-          <Landing>
-            <div className="landing-background"></div>
-            <h1>pintereach</h1>
-            <h2>collect your [...]</h2>
-            <Login />
-          </Landing>
-        </Route>
       </Switch>
     </AppContainer>
   );

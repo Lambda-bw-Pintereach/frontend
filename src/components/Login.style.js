@@ -1,9 +1,6 @@
 import styled from "styled-components";
 
 const LoginContainer = styled.div`
-	display: flex;
-	flex-direction: column;
-
 	label {
 		display: block;
 		position: relative;
@@ -13,7 +10,7 @@ const LoginContainer = styled.div`
 		font-size: 1rem;
 	}
 
-	input {
+	input[type=text], input[type=password] {
 		display: block;
 		height: 2.5rem;
 		width: 15rem;
@@ -29,6 +26,29 @@ const LoginContainer = styled.div`
 	input:focus, input:focus-visible {
 		border-bottom: 3px solid #bf8cf9;
 		outline: 0;
+	}
+
+	.login-error {
+		max-width: 15rem;
+		color: ${p => p.theme.errorOnDark};
+		font-size: .9rem;
+	}
+
+	.login-tos {
+		margin: 0em 0em 1em;
+		label, input {
+			display: inline;
+		}
+	}
+
+	.login-buttons {
+		display: flex;
+		flex-direction: row-reverse;
+		justify-content: space-evenly;
+
+		* {
+			text-transform: uppercase;
+		}
 	}
 `;
 
