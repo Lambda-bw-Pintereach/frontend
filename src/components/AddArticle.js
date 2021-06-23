@@ -1,13 +1,17 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { addArticle } from '../api';
+import { isValidUrl } from '../utils/helpers';
+import fetchPreview from '../utils/linkPreview';
 import AddArticleContainer from './AddArticle.style';
+import LinkPreviewCard from './LinkPreviewCard';
 
 const emptyFormValues = {
 	title: "",
 	preview: "",
 	story: "",
 	category: [],
+	url: "",
 }
 
 export const categories = [
@@ -26,8 +30,9 @@ export const categories = [
 ]
 
 const AddArticle = props => {
-
 	const [formValues, setFormValues] = useState(emptyFormValues);
+	const [linkPreview, setLinkPreview] = useState(null);
+	const [previewTimeout, setPreviewTimeout] = useState(null);
 	const history = useHistory();
 
 	const handleChange = (e) => {
@@ -37,16 +42,35 @@ const AddArticle = props => {
 		};
 
 		setFormValues(updFormValues);
+
+		if (e.target.name === "url") {
+			previewUrl(e.target.value);
+		}
 	};
 
-	const handleCheck = (e) => {
-		const categoryName = e.target.name.slice(4);
-		const category = formValues.category;
-
-		if (category.includes(categoryName))
-			setFormValues({ ...formValues, category: category.filter(c => c !== categoryName) });
-		else
-			setFormValues({ ...formValues, category: [...category, categoryName] });
+	const previewUrl = (url) => {
+		if (isValidUrl(url)) {
+			clearTimeout(previewTimeout);
+			const to = setTimeout(() => {
+				fetchPreview(url)
+					.then(preview => {
+						setPreviewTimeout(null);
+						setLinkPreview(preview);
+						setFormValues({
+							...formValues,
+							title: preview.title,
+							preview: preview.description,
+							story: "(...)",
+							url: url
+						})
+					})
+					.catch(err => {
+						setPreviewTimeout(null);
+						console.log(err)
+					});
+			}, 1000);
+			setPreviewTimeout(to);
+		}
 	}
 
 	// {
@@ -72,24 +96,70 @@ const AddArticle = props => {
 				<h3>Add Article</h3>
 				<form onSubmit={handleSubmit}>
 					<label>
-						<span>Title</span>
-						<input name="title" type="text" value={formValues.title} onChange={handleChange} />
-					</label>
-					<label>
-						<span>Preview</span>
-						<input name="preview" type="textarea" value={formValues.preview} onChange={handleChange} />
-					</label>
-					<label>
-						<span>Story</span>
-						<input name="story" type="textarea" value={formValues.story} onChange={handleChange} />
+						<span>Url (optional)</span>
+						<input
+							id="add-article-url"
+							name="url"
+							value={formValues.url}
+							onChange={handleChange} />
 					</label>
 
-					<span>Categories:</span>
+					{previewTimeout &&
+						"(fetching preview...)"
+					}
+
+					{linkPreview &&
+						<div className="add-article-link-preview">
+							<LinkPreviewCard preview={linkPreview} />
+						</div>
+					}
+
+
+					{!linkPreview &&
+						<>
+							<label>
+								<span>Title</span>
+								<input
+									name="title"
+									type="text"
+									value={formValues.title}
+									onChange={handleChange} />
+							</label>
+
+							<label>
+								<span>Preview</span>
+								<input
+									name="preview"
+									type="textarea"
+									value={formValues.preview}
+									onChange={handleChange} />
+							</label>
+
+							<label>
+								<span>Story</span>
+								<textarea
+									name="story"
+									rows={5}
+									value={formValues.story}
+									onChange={handleChange}
+									disabled={formValues.url && linkPreview}
+								/>
+							</label>
+						</>
+					}
+
+					<span>Category:</span>
 					<div className="cat-list">
-						{categories.map((cat,i) => {
+						{categories.map((cat, i) => {
 							return (
 								<label key={i}>
-									<input name={`cat-${cat}`} type="checkbox" checked={formValues.category.includes(cat)} onChange={handleCheck}/>
+									<input
+										id={`cat-${cat}`}
+										value={cat}
+										type="radio"
+										name="category"
+										checked={formValues.category === cat}
+										onChange={handleChange} />
 									{cat}
 								</label>
 							);

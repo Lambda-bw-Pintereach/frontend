@@ -1,7 +1,8 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import fetchPreview from '../util/linkPreview';
+import { isValidUrl } from '../utils/helpers';
+import fetchPreview from '../utils/linkPreview';
 
 const emptyPreview = {
 	title: "",
@@ -11,44 +12,37 @@ const emptyPreview = {
 }
 
 const LinkPreviewCard = props => {
-	const { url } = props;
-	const [preview, setPreview] = useState(emptyPreview);
+	const { url, preview } = props;
+	const [previewData, setPreviewData] = useState(preview ?? emptyPreview);
 
 	useEffect(() => {
-		// this will cancel the update if the url isn't valid
-		try {
-			new URL(url);
-		} catch (error) {
-			console.log("bad url");
-			return;
+		if (url && isValidUrl(url)) {
+			fetchPreview(url)
+				.then(prev => setPreviewData(prev))
+				.catch(err => console.log(err));
 		}
-
-		fetchPreview(url)
-			.then(prev => setPreview(prev))
-			.catch(err => console.log(err));
-
 	}, [url])
 
 	return (
 		<>
 			<ArticlePreviewContainer>
-				{preview &&
+				{previewData &&
 					<>
 						<div className="article-prev-image">
-							<img src={preview.image} alt={preview.image} />
+							<img src={previewData.image} alt={previewData.image} />
 						</div>
 
 						<div className="article-prev-info">
 							<p>
-								<span className="article-prev-site">{preview.site}</span>
+								<span className="article-prev-site">{previewData.site}</span>
 							</p>
 
 							<p>
-								<span className="article-prev-title">{preview.title}</span>
+								<span className="article-prev-title">{previewData.title}</span>
 							</p>
 
 							<p>
-								<span className="article-prev-desc">{preview.description}</span>
+								<span className="article-prev-desc">{previewData.description}</span>
 							</p>
 						</div>
 					</>
@@ -59,7 +53,7 @@ const LinkPreviewCard = props => {
 }
 
 const ArticlePreviewContainer = styled.div`
-	width: 45em;
+	/* width: 45em; */
 	background-color: #00000022;
 	border: 2px black solid;
 	display: flex;
@@ -78,6 +72,10 @@ const ArticlePreviewContainer = styled.div`
 			height: 100%;
 			object-fit: cover;
 		}
+	}
+
+	p {
+		margin: 0;
 	}
 
 	.article-prev-info {
