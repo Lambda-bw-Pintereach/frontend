@@ -115,17 +115,27 @@ const Login = () => {
 		setIsSigningUp(false);
 	}
 
+	const onSubmit = e => {
+		e.preventDefault();
+
+		if (isSigningUp && !disabled)
+			onSignUpClick(e);
+
+		else if (!isSigningUp)
+			onLoginClick(e);
+	}
+
 	return (
 		<LoginContainer>
 			<div className="form_section">
 
 				<div data-testid="loginForm" className="login-form">
-					<form onSubmit={onLoginClick}>
+					<form onSubmit={onSubmit}>
 
 						<div className="form-group form-label mt-3">
-							<label htmlFor="username">Username:  </label>
+							<label htmlFor="username">{formValues.username && "username"}&nbsp;</label>
 							<input
-								className="form-control"
+								className={isSigningUp && formErrors.username ? "form-control input-error" : "form-control"}
 								type="text"
 								name="username"
 								data-testid="username"
@@ -139,9 +149,9 @@ const Login = () => {
 						}
 
 						<div className="form-group form-label mt-3">
-							<label htmlFor="password">Password: </label>
+							<label htmlFor="password">{formValues.password && "password"}&nbsp;</label>
 							<input
-								className="form-control"
+								className={isSigningUp && formErrors.password ? "form-control input-error" : "form-control"}
 								type="password"
 								name="password"
 								data-testid="password"
@@ -157,9 +167,9 @@ const Login = () => {
 						{isSigningUp &&
 							<>
 								<div className="form-group form-label mt-3">
-									<label htmlFor="email">Email: </label>
+								<label htmlFor="email">{formValues.email && "email"}&nbsp;</label>
 									<input
-										className="form-control"
+										className={isSigningUp && formErrors.email ? "form-control input-error" : "form-control"}
 										type="text"
 										name="email"
 										data-testid="email"

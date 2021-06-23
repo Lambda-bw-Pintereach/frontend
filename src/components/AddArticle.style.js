@@ -38,6 +38,21 @@ const AddArticleContainer = styled.div`
 				padding: .3em;
 			}
 		}
+
+		textarea {
+			resize: vertical;
+			font-family: inherit;
+			font-size: 1rem;
+			padding: .5rem;
+		}
+
+		#add-article-url {
+			resize: none;
+		}
+	}
+
+	.add-article-link-preview {
+		margin: 1rem;
 	}
 
 	span {

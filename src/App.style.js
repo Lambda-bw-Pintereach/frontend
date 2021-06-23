@@ -34,35 +34,35 @@ export const AppContainer = styled.div`
 	} */
 
 	.btn-orange {
-		background-color: ${p => p.theme.secondaryColor};
+		background-color: ${p => p.theme.orangeColor};
 		color: #000000bb;
 	}
 
 	.btn-orange:hover {
-		background-color: ${p => p.theme.secondaryHigh};
+		background-color: ${p => p.theme.orangeHigh};
 		color: #000000dd;
 	}
 
 	.btn-orange:active {
-		background-color: ${p => p.theme.secondaryHigher};
+		background-color: ${p => p.theme.orangeHigher};
 		color: #000000;
 	}
 
 	.btn-orange:disabled {
-		background-color: ${p => p.theme.secondaryLower} !important;
+		background-color: ${p => p.theme.orangeLower} !important;
 		color: #000000bb !important;
 	}
 
 	.btn-blue {
-		background-color: ${p => p.theme.primaryColor};
+		background-color: ${p => p.theme.blueColor};
 	}
 
 	.btn-blue:hover {
-		background-color: ${p => p.theme.primaryHigher};
+		background-color: ${p => p.theme.blueHigher};
 	}
 
 	.btn-blue:active {
-		background-color: ${p => p.theme.primaryHigh};
+		background-color: ${p => p.theme.blueHigh};
 	}
 
 	.btn-red {
@@ -86,7 +86,7 @@ export const Landing = styled.div`
 		bottom: 0;
 		left: 0;
 		right: 0;
-		background: linear-gradient(#0f1322, #0b070f);
+		background: linear-gradient(${p=>p.theme.darkBackground}, ${p=>p.theme.darkBackgroundGradient});
 		z-index: -1;
 	}
 
