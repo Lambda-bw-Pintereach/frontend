@@ -6,5 +6,5 @@ export function fetchArticles() {
 }
 
 export function addArticle(article) {
-	return axiosWithAuth().post("/article");
+	return axiosWithAuth().post("/article", article);
 }

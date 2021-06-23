@@ -30,7 +30,7 @@ const ArticleList = props => {
 	useEffect(() => {
 		fetchArticles()
 			.then(res => {
-				console.log(res);
+				setArticles(res.data);
 			})
 			.catch(err => console.log);
 	})
