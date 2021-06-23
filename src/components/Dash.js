@@ -51,7 +51,7 @@ const Dash = (props) => {
 					</Route>
 
 					<Route path='/dash/article/:id' exact>
-						<Article/>
+						<Article />
 					</Route>
 
 				</Switch>
