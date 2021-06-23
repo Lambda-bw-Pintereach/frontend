@@ -16,14 +16,7 @@ function App() {
       </header> */}
 
       <Switch>
-        <Route path="/" exact>
-          <Landing>
-            <div className="landing-background"></div>
-            <h1>pintereach</h1>
-            <h2>collect your [...]</h2>
-            <Login />
-          </Landing>
-        </Route>
+        
 
         <Route path='/addarticle'>
           <AddArticle />
@@ -34,7 +27,14 @@ function App() {
         </Route>
 
         <PrivateRoute path='/dash' component={Dash} />
-
+        <Route path="/" exact>
+          <Landing>
+            <div className="landing-background"></div>
+            <h1>pintereach</h1>
+            <h2>collect your [...]</h2>
+            <Login />
+          </Landing>
+        </Route>
       </Switch>
     </AppContainer>
   );
