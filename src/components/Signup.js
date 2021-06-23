@@ -4,6 +4,9 @@ import * as yup from 'yup';
 import formSchema from '../utils/formSchema';
 import axios from 'axios';
 
+import { Landing } from '../App.style';
+import LoginContainer from "./Login.style"
+
 const initialFormValues = {
   username: '',
   password: '',
@@ -54,7 +57,7 @@ const Signup = () => {
     axios.post('https://lambda-ft-pintereach-05.herokuapp.com/api/auth/register', newUser)
       .then(res => {
         console.log(res)
-        push('/login')
+        push('/')
       })
       .catch(err => {
         console.log(err)
@@ -63,7 +66,8 @@ const Signup = () => {
 
 
   return (
-    <section>
+    <LoginContainer>
+    <Landing>
       <section className="form_section">
         <h1>Create Account</h1><br />
         <form onSubmit={handleSubmit}>
@@ -78,11 +82,12 @@ const Signup = () => {
             <p className='errors'>{formErrors.password}</p>
           </div>
           <br />
-          <button disabled={disabled}>SignUp</button>
+          <button  className="button-orange" disabled={disabled}>SignUp</button>
         </form><br />
-        <p> Already have an account? <Link to="/login">Login</Link></p>
+        <p> Already have an account? <Link to="/">Login</Link></p>
       </section>
-    </section>
+    </Landing>
+    </LoginContainer>
   );
 }
 

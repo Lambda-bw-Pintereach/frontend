@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { categories } from './AddArticle';
 import DashContainer from './Dash.style';
+import {axiosWithAuth} from '../utils/axiosWithAuth'
 
 const articles = [{
 	title: "Fake Title",
@@ -23,6 +24,17 @@ const articles = [{
 }]
 
 
+const logOut = () => {
+	axiosWithAuth().post('/logout')
+	.then(()=> {
+	  localStorage.removeItem("token");
+	  window.location.href = "/";
+	})
+	.catch(err=> {
+	  console.log(err);
+	})
+  };
+
 const Dash = (props) => {
 	return (
 		<DashContainer>
@@ -35,7 +47,7 @@ const Dash = (props) => {
 					<Link>home</Link>
 					<Link>save article</Link>
 					<Link>settings</Link>
-					<Link>log out</Link>
+					<Link onclick={logOut}>log out</Link>
 				</nav>
 			</div>
 
