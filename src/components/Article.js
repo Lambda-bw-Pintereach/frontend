@@ -24,7 +24,7 @@ const Article = props => {
 				setArticle(res.data);
 			})
 			.catch(err => console.log(err));
-	}, [])
+	})
 
 	const deleteConfirm = (e) => {
 		e.preventDefault();

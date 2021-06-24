@@ -38,6 +38,7 @@ const DashContainer = styled.div`
 		display: flex;
 		flex-direction: row;
 		flex-wrap: wrap;
+		width:80%;
 	}
 
 	.article-card-link {
@@ -46,12 +47,12 @@ const DashContainer = styled.div`
 	}
 
 	.dash-article-card {
-		/* width: 20rem;
-		height: 15rem; */
+		width: 90%;
 		background: #00000022;
 		margin: 1rem;
 		padding: 1rem;
 		position: relative;
+		border-radius:10px;
 		box-shadow: 1px 1px 15px 2px #00000055;
 
 		h5 {

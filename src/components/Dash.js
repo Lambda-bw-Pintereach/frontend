@@ -31,11 +31,11 @@ const Dash = (props) => {
 			<div className="dash-background"></div>
 
 			<div className="dash-header">
-				<h1>pintereach</h1>
+				<h1>Pintereach</h1>
 				<nav>
-					<Link to="/dash">home</Link>
-					<Link to="/dash/savearticle">save article</Link>
-					<Link to="/" onClick={logOut}>log out</Link>
+					<Link to="/dash">Home</Link>
+					<Link to="/dash/savearticle">Add Article</Link>
+					<Link to="/" onClick={logOut}>LogOut</Link>
 				</nav>
 			</div>
 

@@ -1,9 +1,7 @@
 
 import { useParams } from 'react-router-dom';
-import axios from 'axios';
-import { useRouteMatch } from 'react-router-dom';
 import { fetchArticles } from '../api';
-import { categories } from './AddArticle';
+// import { categories } from './AddArticle';
 import FavouriteArticleList from './FavouriteArticleList';
 import { axiosWithAuth } from '../utils/axiosWithAuth'
 import React, { useContext, useEffect, useState } from 'react';
@@ -47,7 +45,7 @@ const ArticleList = props => {
 
 	useEffect(() => {
 		loadArticles();
-	}, [])
+	})
 
 	const { article_id } = useParams();
 
@@ -65,9 +63,9 @@ const ArticleList = props => {
 		<>
 		
 			<div className="dash-section-header">
-				<h3>Your Saved Articles:</h3>
+				<h3>Your Saved Articles</h3>
 				<select>
-					{["show all", ...categories].map((cat, i) => {
+					{["Show All", ...categories].map((cat, i) => {
 						return (
 							<option key={i}>{cat}</option>
 						);
