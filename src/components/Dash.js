@@ -3,7 +3,7 @@ import { Link, Route, Switch, useHistory } from 'react-router-dom';
 
 import DashContainer from './Dash.style';
 
-import AddArticle from './AddArticle';
+import SaveArticle from './SaveArticle';
 import ArticleList from './ArticleList';
 import Article from './Article';
 
@@ -34,7 +34,7 @@ const Dash = (props) => {
 				<h1>pintereach</h1>
 				<nav>
 					<Link to="/dash">home</Link>
-					<Link to="/dash/addarticle">save article</Link>
+					<Link to="/dash/savearticle">save article</Link>
 					<Link to="/" onClick={logOut}>log out</Link>
 				</nav>
 			</div>
@@ -46,8 +46,8 @@ const Dash = (props) => {
 						<ArticleList />
 					</Route>
 
-					<Route path='/dash/addarticle' exact>
-						<AddArticle />
+					<Route path='/dash/savearticle' exact>
+						<SaveArticle />
 					</Route>
 
 					<Route path='/dash/article/:id' exact>

@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useRouteMatch } from 'react-router-dom';
 import { fetchArticles } from '../api';
-import { categories } from './AddArticle';
+import ArticleCard from './ArticleCard';
+import { categories } from './SaveArticle';
 
 const articles = [{
 	id: 1,
@@ -27,13 +28,17 @@ const articles = [{
 const ArticleList = props => {
 	const [articles, setArticles] = useState([]);
 
-	useEffect(() => {
+	const loadArticles = () => {
 		fetchArticles()
 			.then(res => {
 				setArticles(res.data);
 			})
 			.catch(err => console.log);
-	})
+ }
+
+	useEffect(() => {
+		loadArticles();
+	}, [])
 
 
 	return (
@@ -49,17 +54,7 @@ const ArticleList = props => {
 				</select>
 			</div>
 			<div className="dash-article-list">
-				{articles.map((art, i) => {
-					return (
-						<div className="dash-article-card" key={i}>
-							<a href={`/dash/article/${art.article_id}`}>
-								<h5>{art.title}</h5>
-							</a>
-							<p>{art.preview}</p>
-							<p>{art.story}</p>
-						</div>
-					);
-				})}
+				{articles.map((art) => <ArticleCard art={art} key={art.article_id} loadArticles={loadArticles}/>)}
 			</div>
 		</>
 	);

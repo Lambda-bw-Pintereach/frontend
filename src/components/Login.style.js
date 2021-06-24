@@ -1,26 +1,39 @@
 import styled from "styled-components";
 
 const LoginContainer = styled.div`
+	width: 18rem;
+
+	* {
+		/* border: white dotted 1px; */
+		/* background-color: #ffffff11; */
+		box-sizing: border-box;
+	}
+
 	label {
 		display: block;
+
 		position: relative;
 		top: 0.6rem;
-		left: 10px;
+		margin: 0 .5rem;
+
 		color: #adbfcf;
 		font-size: 1rem;
 	}
 
 	input[type=text], input[type=password] {
 		display: block;
+
 		height: 2.5rem;
-		width: 15rem;
+		width: 100%;
 		font-size: 1.5rem;
 		padding: .5rem .5rem .1rem;
+
+		color: #dddddd;
+
 		background-color: #444;
 		border: 0;
-		border-radius: 8px 8px 0px 0px;
 		border-bottom: 3px solid ${p => p.theme.onDark};
-		color: #dddddd;
+		border-radius: 8px 8px 0px 0px;
 	}
 
 	.input-error {
@@ -32,12 +45,11 @@ const LoginContainer = styled.div`
 		outline: 0;
 	}
 
-	.login-error {
+	.login-form-error {
 		margin: auto;
 		max-width: 14rem;
 		color: ${p => p.theme.onDark};
 		font-size: 1rem;
-
 	}
 
 	.login-tos {
@@ -65,7 +77,7 @@ const LoginContainer = styled.div`
 		justify-content: space-evenly;
 
 		* {
-			text-transform: lowercase;
+			text-transform: capitalize;
 		}
 	}
 `;

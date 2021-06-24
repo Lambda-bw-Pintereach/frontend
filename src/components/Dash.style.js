@@ -47,6 +47,38 @@ const DashContainer = styled.div`
 		border: 1px solid black;
 		margin: 1rem;
 		padding: 1rem;
+		position: relative;
+	}
+
+	.dash-card-buttons {
+		position: absolute;
+		bottom: 0px;
+		right: 0px;
+		display: flex;
+		flex-direction: column-reverse;
+
+		button {
+			margin: .1rem;
+		 padding: .1rem;
+		}
+	}
+
+	.loading-blur {
+		position: absolute;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		background: #00000088;
+		color: white;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+
+		&>* {
+			position: relative;
+			margin: auto;
+		}
 	}
 
 	.dash-content {
