@@ -85,6 +85,12 @@ export const AppContainer = styled.div`
 		background-color: ${p => p.theme.redColor}66;
 		color: ${p => p.theme.onDark};
 	}
+
+	.loading-indicator {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
 `;
 
 export const Landing = styled.div`
