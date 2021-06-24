@@ -1,3 +1,11 @@
+
+import { useParams } from 'react-router-dom';
+import axios from 'axios';
+import { useRouteMatch } from 'react-router-dom';
+import { fetchArticles } from '../api';
+import { categories } from './AddArticle';
+import FavouriteArticleList from './FavouriteArticleList';
+import { axiosWithAuth } from '../utils/axiosWithAuth'
 import React, { useContext, useEffect, useState } from 'react';
 import { ApiContext } from '../App';
 import ArticleCard from './ArticleCard';
@@ -26,6 +34,7 @@ const articles = [{
 
 const ArticleList = props => {
 	const [articles, setArticles] = useState([]);
+	const [favourites, setFavourites] = useState([]);
 	const { api } = useContext(ApiContext);
 
 	const loadArticles = () => {
@@ -40,9 +49,21 @@ const ArticleList = props => {
 		loadArticles();
 	}, [])
 
+	const { article_id } = useParams();
+
+    useEffect(()=>{
+        axiosWithAuth().get(`/article/${article_id}`)
+            .then(res=>{
+                setFavourites(res.data);
+            })
+            .catch(err=>{
+                console.log(err.response);
+            })
+    }, [article_id]);
 
 	return (
 		<>
+		
 			<div className="dash-section-header">
 				<h3>Your Saved Articles:</h3>
 				<select>
@@ -53,9 +74,15 @@ const ArticleList = props => {
 					})}
 				</select>
 			</div>
+			<section className="articleDashboard">
 			<div className="dash-article-list">
 				{articles.map((art) => <ArticleCard art={art} key={art.article_id} loadArticles={loadArticles}/>)}
 			</div>
+			
+			<div className='favouriteArticles'>
+			<FavouriteArticleList favourites={favourites}/>
+			</div>
+			</section>
 		</>
 	);
 }
