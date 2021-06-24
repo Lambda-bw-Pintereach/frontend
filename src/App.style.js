@@ -87,9 +87,25 @@ export const AppContainer = styled.div`
 	}
 
 	.loading-indicator {
+		margin: 3rem;
 		display: flex;
 		align-items: center;
 		justify-content: center;
+	}
+
+	.loading-indicator-fill {
+		position: absolute;
+
+		display: flex;
+		align-items: center;
+		justify-content: center;
+
+		top: 0;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		z-index: 10;
+		background-color: #15133888;
 	}
 `;
 

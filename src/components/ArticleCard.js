@@ -1,64 +1,22 @@
 import React, { useState } from 'react';
-import styled from 'styled-components';
-import { deleteArticle } from '../api';
-import Loader from 'react-spinners/PuffLoader';
-import theme from '../style/theme';
+
+import { useHistory } from 'react-router-dom';
 
 const ArticleCard = props => {
-	const { art, loadArticles } = props;
-	const [isConfirmDelete, setIsConfirmDelete] = useState(false);
-	const [isLoading, setIsLoading] = useState(false);
+	const { art } = props;
+	const history = useHistory();
 
-	const promptConfirm = () => {
-		setIsConfirmDelete(true);
-	}
-
-	const style = {
-		opacity: isLoading ? "75%" : "100%"
-	}
-
-	const onConfirm = (del) => {
-		if (del) {
-			setIsLoading(true);
-			deleteArticle(art.article_id)
-				.then(res => loadArticles())
-				.catch(err => console.log(err));
-		}
-
-		else {
-			setIsConfirmDelete(false);
-		}
+	const onCardClick = (e) => {
+		history.push(`/dash/article/${art.article_id}`);
 	}
 
 	return (
-		<div className="dash-article-card" style={style}>
-
-			{isLoading &&
-				<div className="loading-blur">
-					<Loader color={theme.blueHigh} />
-				</div>
-			}
-
-			<div className="dash-card-buttons">
-				{!isConfirmDelete &&
-					<button className="btn" onClick={() => promptConfirm()}>delete</button>
-				}
-
-				{isConfirmDelete &&
-					<>
-						<span>confirm?</span>
-						<button className="btn-blue btn" onClick={() => onConfirm(false)}>no</button>
-						<button className="btn-red btn" onClick={() => onConfirm(true)}>yes</button>
-					</>
-				}
-			</div>
-
-			<a href={`/dash/article/${art.article_id}`}>
+		<div className="dash-article-card" onClick={onCardClick}>
+			<a href={`/dash/article/${art.article_id}`} className="article-card-link">
 				<h5>{art.title}</h5>
 			</a>
 			<p>{art.preview}</p>
-			<p>{art.story}</p>
-		</div >
+		</div>
 	);
 }
 

@@ -5,7 +5,7 @@ import { isValidUrl } from '../utils/helpers';
 import fetchPreview from '../utils/linkPreview';
 import SaveArticleContainer from './SaveArticle.style';
 import LinkPreviewCard from './LinkPreviewCard';
-import Loader from 'react-spinners/PropagateLoader';
+import LoadingIndicator from './LoadingIndicator';
 
 const emptyFormValues = {
 	title: "",
@@ -34,7 +34,6 @@ const SaveArticle = props => {
 	const [formValues, setFormValues] = useState(emptyFormValues);
 	const [linkPreview, setLinkPreview] = useState(null);
 	const [previewTimeout, setPreviewTimeout] = useState(null);
-	const [isLoading, setIsLoading] = useState(false);
 	const [error, setError] = useState("");
 
 	const history = useHistory();
@@ -79,7 +78,6 @@ const SaveArticle = props => {
 
 	const handleSubmit = e => {
 		e.preventDefault();
-		setIsLoading(true);
 
 		const article = {
 			title: formValues.title ? formValues.title : "(no title)",
@@ -95,7 +93,6 @@ const SaveArticle = props => {
 			})
 			.catch(err => {
 				console.log(err);
-				setIsLoading(false);
 				setError("An error occured. Please refresh and try again.")
 			});
 	}
@@ -104,8 +101,6 @@ const SaveArticle = props => {
 		<>
 			<SaveArticleContainer>
 				<h3>Add Article</h3>
-
-				{!isLoading &&
 
 					<form onSubmit={handleSubmit}>
 						<label>
@@ -187,11 +182,8 @@ const SaveArticle = props => {
 						<input type="submit" value="Submit" disabled={error}/>
 						</div>
 					</form>
-				}
 
-				{isLoading &&
-					<Loader />
-				}
+				<LoadingIndicator color="white" fill/>
 
 			</SaveArticleContainer>
 		</>

@@ -37,15 +37,30 @@ export class PintereachApi {
 
 	_wrap(func) {
 		this._setIsLoading(true);
-		return func()
-			.then(res => {
-				this._setIsLoading(false);
-				return res;
-			})
-			.catch(err => {
-				this._setIsLoading(false);
-				throw err;
-		})
+
+		return new Promise((resolve, reject) => {
+			setTimeout(() => {
+				func()
+					.then(res => {
+						this._setIsLoading(false);
+						resolve(res);
+					})
+					.catch(err => {
+						this._setIsLoading(false);
+						reject(err);
+					})
+			}, 1000);
+		});
+
+		// return func()
+		// 	.then(res => {
+		// 		this._setIsLoading(false);
+		// 		return res;
+		// 	})
+		// 	.catch(err => {
+		// 		this._setIsLoading(false);
+		// 		throw err;
+		// 	})
 	}
 }
 
