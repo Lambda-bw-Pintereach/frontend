@@ -6,9 +6,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
 	return <Route {...rest} render={(props) => {
 
 
-		// for now I'm just going to assume the user is logged in already
-		// if (localStorage.getItem("token")) {
-		if (true) {
+		if (localStorage.getItem("token")) {
 
 			if (props.Component !== null)
 				return (<Component {...props} />);

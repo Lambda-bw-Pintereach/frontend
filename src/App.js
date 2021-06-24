@@ -1,39 +1,45 @@
-import './App.css';
-import React from 'react';
-import { Route, Switch } from "react-router-dom";
-import AddArticle from './components/AddArticle';
-import Signup from './components/Signup';
+import React, { createContext, useState } from 'react';
+import { Switch } from "react-router-dom";
+
 import { AppContainer, Landing } from './App.style';
-import Login from './components/Login';
+import './App.css';
+
 import PrivateRoute from './components/PrivateRoute';
+import Login from './components/Login';
 import Dash from './components/Dash';
-import ArticleList from './components/ArticleList';
+import { PintereachApi } from './api';
+
+export const ApiContext = createContext({});
+export const LoadingContext = createContext({});
 
 function App() {
+  // const [isLoading, setIsLoading] = useState(false);
+  // const [api, setApi] = useState(new PintereachApi(setIsLoading));
+  const api = PintereachApi();
+
   return (
-    <AppContainer>
-      {/* <header className="App-header">
-        Pintereach
-      </header> */}
+    <ApiContext.Provider value={{ api }}>
+      {/* <LoadingContext.Provider value={{ isLoading }}> */}
 
-      <Switch>
-        <PrivateRoute path='/dash'>
-          <Dash />
-        </PrivateRoute>
+        <AppContainer>
+          <Switch>
 
-        <Route path='/signup'>
-          <Signup />
-        </Route>
+            <PrivateRoute path='/dash'>
+              <Dash />
+            </PrivateRoute>
 
-        <Landing>
-          <div className="landing-background"></div>
-          <h1>pintereach</h1>
-          <h2>collect your [...]</h2>
-          <Login />
-        </Landing>
+            <Landing>
+              <div className="landing-background"></div>
+              <h1>pintereach</h1>
+              <h2>collect your [...]</h2>
+              <Login />
+            </Landing>
 
-      </Switch>
-    </AppContainer>
+          </Switch>
+        </AppContainer>
+
+      {/* </LoadingContext.Provider> */}
+    </ApiContext.Provider>
   );
 }
 

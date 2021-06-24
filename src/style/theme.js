@@ -1,15 +1,15 @@
 // prettier-ignore
 const theme = {
-	primaryColor:	 		"#0F7891",
-	primaryHigher: 		"#30B4D2",
-	primaryHigh: 			"#2091AC",
-	primaryLow: 			"#145C6D",
-	primaryLower: 		"#0E4855",
-	secondaryColor: 	"#EA7D12",
-	secondaryHigh: 		"#FF9935",
-	secondaryHigher:	"#FF9329",
-	secondaryLow: 		"#B0661C",
-   secondaryLower: "#894E14",
+	blueColor:	 		"#0F7891",
+	blueHigher: 		"#30B4D2",
+	blueHigh: 			"#2091AC",
+	blueLow: 			"#145C6D",
+	blueLower: 		"#0E4855",
+	orangeColor: 	"#EA7D12",
+	orangeHigh: 		"#FF9935",
+	orangeHigher:	"#FF9329",
+	orangeLow: 		"#B0661C",
+   orangeLower: "#894E14",
 
    redColor:      "#C3191D",
    redHigher:     "#FE2E33",
@@ -17,10 +17,14 @@ const theme = {
    redLow:        "#97171A",
    redLower:      "#6A0E10",
 
-	darkBackground: 				"#0f1322",
-	darkBackgroundGradient: "#0b070f",
-   onDark: "#f0f0f0",
-   errorOnDark: "#FF8855",
+	darkBackground: 				"#364056",
+   darkBackgroundGradient: "#0c0a13",
+
+deepPurp: "#151338",
+deepPurpGradient: "#06040e",
+
+   onDark:                    "#f0f0f0",
+   errorOnDark:               "#ef765a",
 
 	lightBackground: "#dddddd",
 	onLight: "#222222",
@@ -34,7 +38,7 @@ export default theme;
 #####  Palette URL: http://paletton.com/#uid=70z0G0ktztppnMjqU-HqTm5rqhf
 
 
-*** Primary color:
+*** blue color:
 
    shade 0 = #EA7D12 = rgb(234,125, 18) = rgba(234,125, 18,1) = rgb0(0.918,0.49,0.071)
    shade 1 = #FF9935 = rgb(255,153, 53) = rgba(255,153, 53,1) = rgb0(1,0.6,0.208)
@@ -42,7 +46,7 @@ export default theme;
    shade 3 = #B0661C = rgb(176,102, 28) = rgba(176,102, 28,1) = rgb0(0.69,0.4,0.11)
    shade 4 = #894E14 = rgb(137, 78, 20) = rgba(137, 78, 20,1) = rgb0(0.537,0.306,0.078)
 
-*** Secondary color (1):
+*** orange color (1):
 
    shade 0 = #EAB812 = rgb(234,184, 18) = rgba(234,184, 18,1) = rgb0(0.918,0.722,0.071)
    shade 1 = #FFD035 = rgb(255,208, 53) = rgba(255,208, 53,1) = rgb0(1,0.816,0.208)
@@ -50,7 +54,7 @@ export default theme;
    shade 3 = #B08D1C = rgb(176,141, 28) = rgba(176,141, 28,1) = rgb0(0.69,0.553,0.11)
    shade 4 = #896E14 = rgb(137,110, 20) = rgba(137,110, 20,1) = rgb0(0.537,0.431,0.078)
 
-*** Secondary color (2):
+*** orange color (2):
 
    shade 0 = #2922A3 = rgb( 41, 34,163) = rgba( 41, 34,163,1) = rgb0(0.161,0.133,0.639)
    shade 1 = #4F46DC = rgb( 79, 70,220) = rgba( 79, 70,220,1) = rgb0(0.31,0.275,0.863)

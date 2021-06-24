@@ -1,14 +1,11 @@
 import React from 'react';
-import { Link, Route, Switch, useHistory, useParams, useRouteMatch } from 'react-router-dom';
-import styled from 'styled-components';
-import AddArticle, { categories } from './AddArticle';
+import { Link, Route, Switch, useHistory } from 'react-router-dom';
+
 import DashContainer from './Dash.style';
-import { axiosWithAuth } from '../utils/axiosWithAuth'
+
+import SaveArticle from './SaveArticle';
 import ArticleList from './ArticleList';
 import Article from './Article';
-
-
-
 
 
 const Dash = (props) => {
@@ -37,28 +34,28 @@ const Dash = (props) => {
 				<h1>pintereach</h1>
 				<nav>
 					<Link to="/dash">home</Link>
-					<Link to="/dash/addarticle">save article</Link>
+					<Link to="/dash/savearticle">save article</Link>
 					<Link to="/" onClick={logOut}>log out</Link>
 				</nav>
 			</div>
 
-
 			<div className="dash-content">
 				<Switch>
+
 					<Route path='/dash' exact>
 						<ArticleList />
 					</Route>
 
-					<Route path='/dash/addarticle' exact>
-						<AddArticle />
+					<Route path='/dash/savearticle' exact>
+						<SaveArticle />
 					</Route>
 
 					<Route path='/dash/article/:id' exact>
-						<Article/>
+						<Article />
 					</Route>
+
 				</Switch>
 			</div>
-
 
 		</DashContainer>
 	)

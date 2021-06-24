@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import { useRouteMatch } from 'react-router-dom';
@@ -6,6 +6,10 @@ import { fetchArticles } from '../api';
 import { categories } from './AddArticle';
 import FavouriteArticleList from './FavouriteArticleList';
 import { axiosWithAuth } from '../utils/axiosWithAuth'
+import React, { useContext, useEffect, useState } from 'react';
+import { ApiContext } from '../App';
+import ArticleCard from './ArticleCard';
+import { categories } from './SaveArticle';
 
 const articles = [{
 	id: 1,
@@ -31,14 +35,19 @@ const articles = [{
 const ArticleList = props => {
 	const [articles, setArticles] = useState([]);
 	const [favourites, setFavourites] = useState([]);
+	const { api } = useContext(ApiContext);
 
-	useEffect(() => {
-		fetchArticles()
+	const loadArticles = () => {
+		api.fetchArticles()
 			.then(res => {
 				setArticles(res.data);
 			})
 			.catch(err => console.log);
-	})
+ }
+
+	useEffect(() => {
+		loadArticles();
+	}, [])
 
 	const { article_id } = useParams();
 
@@ -67,17 +76,7 @@ const ArticleList = props => {
 			</div>
 			<section className="articleDashboard">
 			<div className="dash-article-list">
-				{articles.map((art, i) => {
-					return (
-						<div className="dash-article-card" key={i}>
-							<a href={`/dash/article/${art.id}`}>
-								<h5>{art.title}</h5>
-							</a>
-							<p>{art.preview}</p>
-							<p>{art.story}</p>
-						</div>
-					);
-				})}
+				{articles.map((art) => <ArticleCard art={art} key={art.article_id} loadArticles={loadArticles}/>)}
 			</div>
 			
 			<div className='favouriteArticles'>

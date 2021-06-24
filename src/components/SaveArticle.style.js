@@ -1,12 +1,13 @@
 import styled from "styled-components";
 
-const AddArticleContainer = styled.div`
+const SaveArticleContainer = styled.div`
 	background-color: #00000022;
 	max-width: 40em;
 	margin: 1em auto;
 	padding: 1em;
 	border: 1px solid black;
 	text-align: left;
+	position: relative;
 
 	h3 {
 		margin: 0em 0em 1em;
@@ -38,6 +39,21 @@ const AddArticleContainer = styled.div`
 				padding: .3em;
 			}
 		}
+
+		textarea {
+			resize: vertical;
+			font-family: inherit;
+			font-size: 1rem;
+			padding: .5rem;
+		}
+
+		#add-article-url {
+			resize: none;
+		}
+	}
+
+	.add-article-link-preview {
+		margin: 1rem;
 	}
 
 	span {
@@ -76,4 +92,4 @@ const AddArticleContainer = styled.div`
 	}
 `;
 
-export default AddArticleContainer;
+export default SaveArticleContainer;
