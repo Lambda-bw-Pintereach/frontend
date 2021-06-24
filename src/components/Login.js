@@ -26,6 +26,7 @@ const Login = () => {
 	const [formErrors, setFormErrors] = useState(initialFormErrors)
 	const [isSigningUp, setIsSigningUp] = useState(false);
 	const [disabled, setDisabled] = useState(true)
+	const [loginError, setLoginError] = useState("");
 
 	const handleChange = e => {
 		if (e.target.type === "checkbox") {
@@ -61,6 +62,7 @@ const Login = () => {
 			})
 			.catch(err => {
 				console.log(err);
+				setLoginError(err.response.data.message);
 			});
 	};
 
@@ -77,12 +79,11 @@ const Login = () => {
 
 			axios.post('https://lambda-ft-pintereach-05.herokuapp.com/api/auth/register', newUser)
 				.then(res => {
-					console.log(res)
-					//history.push('/')
 					onLoginClick(e);
 				})
 				.catch(err => {
-					console.log(err)
+					console.log(err);
+					setLoginError(err.response.data.message);
 				})
 		}
 
@@ -125,14 +126,17 @@ const Login = () => {
 			onLoginClick(e);
 	}
 
+	const handleKey = e => {
+		if (e.key === "Enter") {
+			onSubmit(e);
+		}
+	}
+
 	return (
 		<LoginContainer>
-			<div className="form_section">
 
-				<div data-testid="loginForm" className="login-form">
-					<form onSubmit={onSubmit}>
+					<form onSubmit={onSubmit} onKeyDown={handleKey}>
 
-						<div className="form-group form-label mt-3">
 							<label htmlFor="username">{formValues.username && "username"}&nbsp;</label>
 							<input
 								className={isSigningUp && formErrors.username ? "form-control input-error" : "form-control"}
@@ -141,14 +145,12 @@ const Login = () => {
 								data-testid="username"
 								value={formValues.username}
 								onChange={handleChange}
-								placeholder="Username" />
-						</div>
+								placeholder="username" />
 
 						{isSigningUp && formErrors.username &&
-							<div className="login-error">{formErrors.username}</div>
+							<div className="login-form-error">{formErrors.username}</div>
 						}
 
-						<div className="form-group form-label mt-3">
 							<label htmlFor="password">{formValues.password && "password"}&nbsp;</label>
 							<input
 								className={isSigningUp && formErrors.password ? "form-control input-error" : "form-control"}
@@ -157,17 +159,15 @@ const Login = () => {
 								data-testid="password"
 								value={formValues.password}
 								onChange={handleChange}
-								placeholder="Password" />
-						</div>
+								placeholder="password" />
 
 						{isSigningUp && formErrors.password &&
-							<div className="login-error">{formErrors.password}</div>
+							<div className="login-form-error">{formErrors.password}</div>
 						}
 
 						{isSigningUp &&
 							<>
-								<div className="form-group form-label mt-3">
-								<label htmlFor="email">{formValues.email && "email"}&nbsp;</label>
+									<label htmlFor="email">{formValues.email && "email"}&nbsp;</label>
 									<input
 										className={isSigningUp && formErrors.email ? "form-control input-error" : "form-control"}
 										type="text"
@@ -175,11 +175,10 @@ const Login = () => {
 										data-testid="email"
 										value={formValues.email}
 										onChange={handleChange}
-										placeholder="email address" />
-								</div>
+										placeholder="email" />
 
 								{isSigningUp && formErrors.email &&
-									<div className="login-error">{formErrors.email}</div>
+									<div className="login-form-error">{formErrors.email}</div>
 								}
 
 								<div className="login-tos">
@@ -191,21 +190,25 @@ const Login = () => {
 							</>
 						}
 
+						{loginError &&
+							<div className="login-error-msg">
+								{loginError}
+							</div>
+						}
+
 						<div className="login-buttons">
 							{/* <Link to="/signup"><button className="btn btn-orange">Sign Up</button></Link> */}
 
 							{!isSigningUp &&
-								<button className="btn btn-blue" onClick={onLoginClick} default>Login</button>}
+								<button className="btn btn-orange" onClick={onLoginClick} default>Login</button>}
 
 							{isSigningUp &&
 								<button className="btn btn-red" onClick={onCancelClick}>Cancel</button>
 							}
 
-							<button className="btn btn-orange" onClick={onSignUpClick} disabled={isSigningUp && disabled}>Sign up</button>
+							<button className="btn btn-blue" onClick={onSignUpClick} disabled={isSigningUp && disabled}>Sign up</button>
 						</div>
 					</form>
-				</div>
-			</div>
 		</LoginContainer>
 	)
 }
