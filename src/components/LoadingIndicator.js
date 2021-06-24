@@ -1,10 +1,10 @@
 import React, { useContext } from 'react';
-import { ApiContext } from '../App';
+import { LoadingContext } from '../App';
 import Puff from 'react-spinners/PuffLoader';
 
 const LoadingIndicator = props => {
 	const { fill, color, ...rest } = props;
-	const { isLoading } = useContext(ApiContext);
+	const { isLoading } = useContext(LoadingContext);
 
 	if (isLoading)
 		return (

@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { saveArticle } from '../api';
 import { isValidUrl } from '../utils/helpers';
 import fetchPreview from '../utils/linkPreview';
 import SaveArticleContainer from './SaveArticle.style';
 import LinkPreviewCard from './LinkPreviewCard';
 import LoadingIndicator from './LoadingIndicator';
+import { ApiContext } from '../App';
 
 const emptyFormValues = {
 	title: "",
@@ -35,6 +35,7 @@ const SaveArticle = props => {
 	const [linkPreview, setLinkPreview] = useState(null);
 	const [previewTimeout, setPreviewTimeout] = useState(null);
 	const [error, setError] = useState("");
+	const { api } = useContext(ApiContext);
 
 	const history = useHistory();
 
@@ -87,7 +88,7 @@ const SaveArticle = props => {
 			url: formValues.url
 		}
 
-		saveArticle(article)
+		api.saveArticle(article)
 			.then(res => {
 				history.push('/dash')
 			})

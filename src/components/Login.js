@@ -30,7 +30,7 @@ const Login = () => {
 	const [disabled, setDisabled] = useState(true)
 	const [loginError, setLoginError] = useState("");
 
-	const { isLoading, api } = useContext(ApiContext);
+	const { api } = useContext(ApiContext);
 
 	const handleChange = e => {
 		if (e.target.type === "checkbox") {

@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
-import { fetchArticle } from '../api';
-import { deleteArticle } from '../api';
+import { ApiContext } from '../App';
 import deleteIcon from '../images/trash.svg';
 import backIcon from '../images/undo-arrow.svg';
-import questionIcon from '../images/question-mark.svg';
+import LoadingIndicator from './LoadingIndicator';
 
 const Article = props => {
 	const { id } = useParams();
 	const history = useHistory();
+	const { api } = useContext(ApiContext);
 	const [article, setArticle] = useState({
 		title: "",
 		preview: "",
@@ -19,12 +19,12 @@ const Article = props => {
 	const [isConfirmDelete, setIsConfirmDelete] = useState(false);
 
 	useEffect(() => {
-		fetchArticle(id)
+		api.fetchArticle(id)
 			.then(res => {
 				setArticle(res.data);
 			})
 			.catch(err => console.log(err));
-	})
+	}, [])
 
 	const deleteConfirm = (e) => {
 		e.preventDefault();
@@ -33,7 +33,7 @@ const Article = props => {
 
 	const onConfirm = (del) => {
 		if (del) {
-			deleteArticle(article.article_id)
+			api.deleteArticle(article.article_id)
 				.then(res => history.push("/dash"))
 				.catch(err => console.log(err));
 		}
@@ -52,6 +52,8 @@ const Article = props => {
 						<h5>{article.title}</h5>
 					</a>
 					<p>{article.story}</p>
+
+					<LoadingIndicator fill/>
 				</div>
 
 				<div className="dash-article-buttons">
