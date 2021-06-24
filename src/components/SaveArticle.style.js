@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const AddArticleContainer = styled.div`
+const SaveArticleContainer = styled.div`
 	background-color: #00000022;
 	max-width: 40em;
 	margin: 1em auto;
@@ -91,4 +91,4 @@ const AddArticleContainer = styled.div`
 	}
 `;
 
-export default AddArticleContainer;
+export default SaveArticleContainer;

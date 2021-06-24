@@ -76,6 +76,15 @@ export const AppContainer = styled.div`
 	.btn-red:active {
 		background-color: ${p => p.theme.redHigh};
 	}
+
+	.error-msg-box {
+		font-size: 1rem;
+		margin: 1rem;
+		padding: .4rem;
+		border: 2px solid ${p => p.theme.redColor};
+		background-color: ${p => p.theme.redColor}66;
+		color: ${p => p.theme.onDark};
+	}
 `;
 
 export const Landing = styled.div`

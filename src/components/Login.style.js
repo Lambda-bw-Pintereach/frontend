@@ -52,15 +52,6 @@ const LoginContainer = styled.div`
 		font-size: 1rem;
 	}
 
-	.login-error-msg {
-		font-size: 1rem;
-		margin: 1rem;
-		padding: .4rem;
-		border: 2px solid ${p=>p.theme.redColor};
-		background-color: ${p => p.theme.redColor}66;
-		color: ${p=>p.theme.onDark};
-	}
-
 	.login-tos {
 		margin: 1rem auto 0;
 
