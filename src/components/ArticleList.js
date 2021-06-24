@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import axios from 'axios';
 import { useRouteMatch } from 'react-router-dom';
 import { fetchArticles } from '../api';
 import { categories } from './AddArticle';
+import FavouriteArticleList from './FavouriteArticleList';
+import { axiosWithAuth } from '../utils/axiosWithAuth'
 
 const articles = [{
 	id: 1,
@@ -26,6 +30,7 @@ const articles = [{
 
 const ArticleList = props => {
 	const [articles, setArticles] = useState([]);
+	const [favourites, setFavourites] = useState([]);
 
 	useEffect(() => {
 		fetchArticles()
@@ -35,9 +40,21 @@ const ArticleList = props => {
 			.catch(err => console.log);
 	})
 
+	const { article_id } = useParams();
+
+    useEffect(()=>{
+        axiosWithAuth().get(`/article/${article_id}`)
+            .then(res=>{
+                setFavourites(res.data);
+            })
+            .catch(err=>{
+                console.log(err.response);
+            })
+    }, [article_id]);
 
 	return (
 		<>
+		
 			<div className="dash-section-header">
 				<h3>Your Saved Articles:</h3>
 				<select>
@@ -48,6 +65,7 @@ const ArticleList = props => {
 					})}
 				</select>
 			</div>
+			<section className="articleDashboard">
 			<div className="dash-article-list">
 				{articles.map((art, i) => {
 					return (
@@ -61,6 +79,11 @@ const ArticleList = props => {
 					);
 				})}
 			</div>
+			
+			<div className='favouriteArticles'>
+			<FavouriteArticleList favourites={favourites}/>
+			</div>
+			</section>
 		</>
 	);
 }

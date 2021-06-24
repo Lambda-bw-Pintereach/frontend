@@ -1,5 +1,6 @@
 * {
   /* box-sizing: border-box; */
+  border: 1px solid red;
 }
 
 body {
@@ -14,6 +15,7 @@ body {
   min-height: 100vh;
 
   font-size: 18px;
+
 }
 
 @media only screen and (max-width: 600px) {
@@ -25,4 +27,11 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+.articleDashboard{
+  display: flex;
+  justify-content: space-between;
+}
+.favouriteArticles{
+  width: 30%;
 }
