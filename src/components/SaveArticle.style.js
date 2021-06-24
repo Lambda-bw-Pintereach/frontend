@@ -7,6 +7,7 @@ const SaveArticleContainer = styled.div`
 	padding: 1em;
 	border: 1px solid black;
 	text-align: left;
+	position: relative;
 
 	h3 {
 		margin: 0em 0em 1em;

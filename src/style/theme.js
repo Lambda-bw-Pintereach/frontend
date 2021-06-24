@@ -20,8 +20,8 @@ const theme = {
 	darkBackground: 				"#364056",
    darkBackgroundGradient: "#0c0a13",
 
-// darkBackground: "#151338",
-//    darkBackgroundGradient: "#06040e",
+deepPurp: "#151338",
+deepPurpGradient: "#06040e",
 
    onDark:                    "#f0f0f0",
    errorOnDark:               "#ef765a",

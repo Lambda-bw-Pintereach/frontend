@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { useRouteMatch } from 'react-router-dom';
-import { fetchArticles } from '../api';
+import React, { useContext, useEffect, useState } from 'react';
+import { ApiContext } from '../App';
 import ArticleCard from './ArticleCard';
 import { categories } from './SaveArticle';
 
@@ -27,9 +26,10 @@ const articles = [{
 
 const ArticleList = props => {
 	const [articles, setArticles] = useState([]);
+	const { api } = useContext(ApiContext);
 
 	const loadArticles = () => {
-		fetchArticles()
+		api.fetchArticles()
 			.then(res => {
 				setArticles(res.data);
 			})

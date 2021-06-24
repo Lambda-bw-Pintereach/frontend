@@ -1,25 +1,22 @@
 import React, { useContext } from 'react';
-import { ApiContext } from '../App';
+import { LoadingContext } from '../App';
 import Puff from 'react-spinners/PuffLoader';
 
 const LoadingIndicator = props => {
-	const { isLoading } = useContext(ApiContext);
+	const { fill, color, ...rest } = props;
+	const { isLoading } = useContext(LoadingContext);
 
-	return (
-		<div className="loading-indicator">
-			<div style={{ width: 50, height: 50 }}>
+	if (isLoading)
+		return (
+			<div className={fill ? "loading-indicator-fill" : "loading-indicator"}>
 
-				<div>
-					<Puff color="white" size={50} loading={isLoading}/>
-				</div>
-
-				<div style={{ margin: "10px" }} >
-					<Puff color="red" size={30} speedMultiplier={1.5} loading={isLoading}/>
-				</div>
+				<Puff color={color ?? "white"} size={50} loading={isLoading} rest />
 
 			</div>
-		</div>
-	);
+		);
+
+	else
+		return <></>;
 }
 
 export default LoadingIndicator;
