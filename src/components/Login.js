@@ -1,9 +1,11 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useHistory, Link } from 'react-router-dom';
 import LoginContainer from "./Login.style"
 import * as yup from 'yup';
 import formSchema from '../utils/formSchema';
+import { ApiContext } from "../App";
+import LoadingIndicator from "./LoadingIndicator";
 
 
 const emptyLogin = {
@@ -27,6 +29,8 @@ const Login = () => {
 	const [isSigningUp, setIsSigningUp] = useState(false);
 	const [disabled, setDisabled] = useState(true)
 	const [loginError, setLoginError] = useState("");
+
+	const { isLoading, api } = useContext(ApiContext);
 
 	const handleChange = e => {
 		if (e.target.type === "checkbox") {
@@ -54,11 +58,9 @@ const Login = () => {
 			username: formValues.username,
 			password: formValues.password,
 		}
-		axios.post('https://lambda-ft-pintereach-05.herokuapp.com/api/auth/login', newUser)
+		api.login(newUser)
 			.then(res => {
-				localStorage.setItem("token", res.data.token);
 				history.push('/dash');
-				console.log(res)
 			})
 			.catch(err => {
 				console.log(err);
@@ -77,7 +79,7 @@ const Login = () => {
 				password: formValues.password.trim(),
 			}
 
-			axios.post('https://lambda-ft-pintereach-05.herokuapp.com/api/auth/register', newUser)
+			api.signUp(newUser)
 				.then(res => {
 					onLoginClick(e);
 				})
@@ -90,6 +92,8 @@ const Login = () => {
 		//show form
 		else {
 			setIsSigningUp(true);
+			setFormErrors(initialFormErrors);
+			setLoginError("");
 		}
 	}
 
@@ -114,6 +118,8 @@ const Login = () => {
 
 	const onCancelClick = e => {
 		setIsSigningUp(false);
+		setFormErrors(initialFormErrors);
+		setLoginError("");
 	}
 
 	const onSubmit = e => {
@@ -135,80 +141,83 @@ const Login = () => {
 	return (
 		<LoginContainer>
 
-					<form onSubmit={onSubmit} onKeyDown={handleKey}>
+			<form onSubmit={onSubmit} onKeyDown={handleKey}>
 
-							<label htmlFor="username">{formValues.username && "username"}&nbsp;</label>
-							<input
-								className={isSigningUp && formErrors.username ? "form-control input-error" : "form-control"}
-								type="text"
-								name="username"
-								data-testid="username"
-								value={formValues.username}
-								onChange={handleChange}
-								placeholder="username" />
+				<label htmlFor="username">{formValues.username && "username"}&nbsp;</label>
+				<input
+					className={isSigningUp && formErrors.username ? "form-control input-error" : "form-control"}
+					type="text"
+					name="username"
+					data-testid="username"
+					value={formValues.username}
+					onChange={handleChange}
+					placeholder="username" />
 
-						{isSigningUp && formErrors.username &&
-							<div className="login-form-error">{formErrors.username}</div>
+				{isSigningUp && formErrors.username &&
+					<div className="login-form-error">{formErrors.username}</div>
+				}
+
+				<label htmlFor="password">{formValues.password && "password"}&nbsp;</label>
+				<input
+					className={isSigningUp && formErrors.password ? "form-control input-error" : "form-control"}
+					type="password"
+					name="password"
+					data-testid="password"
+					value={formValues.password}
+					onChange={handleChange}
+					placeholder="password" />
+
+				{isSigningUp && formErrors.password &&
+					<div className="login-form-error">{formErrors.password}</div>
+				}
+
+				{isSigningUp &&
+					<>
+						<label htmlFor="email">{formValues.email && "email"}&nbsp;</label>
+						<input
+							className={isSigningUp && formErrors.email ? "form-control input-error" : "form-control"}
+							type="text"
+							name="email"
+							data-testid="email"
+							value={formValues.email}
+							onChange={handleChange}
+							placeholder="email" />
+
+						{isSigningUp && formErrors.email &&
+							<div className="login-form-error">{formErrors.email}</div>
 						}
 
-							<label htmlFor="password">{formValues.password && "password"}&nbsp;</label>
-							<input
-								className={isSigningUp && formErrors.password ? "form-control input-error" : "form-control"}
-								type="password"
-								name="password"
-								data-testid="password"
-								value={formValues.password}
-								onChange={handleChange}
-								placeholder="password" />
-
-						{isSigningUp && formErrors.password &&
-							<div className="login-form-error">{formErrors.password}</div>
-						}
-
-						{isSigningUp &&
-							<>
-									<label htmlFor="email">{formValues.email && "email"}&nbsp;</label>
-									<input
-										className={isSigningUp && formErrors.email ? "form-control input-error" : "form-control"}
-										type="text"
-										name="email"
-										data-testid="email"
-										value={formValues.email}
-										onChange={handleChange}
-										placeholder="email" />
-
-								{isSigningUp && formErrors.email &&
-									<div className="login-form-error">{formErrors.email}</div>
-								}
-
-								<div className="login-tos">
-									<label>
-										<input type="checkbox" name="tosAgree" data-testid="tosAgree" value={formValues.tosAgree} onChange={handleChange} />
-										I agree to the terms of service.
-									</label>
-								</div>
-							</>
-						}
-
-						{loginError &&
-							<div className="error-msg-box">
-								{loginError}
-							</div>
-						}
-
-						<div className="login-buttons">
-							{/* <Link to="/signup"><button className="btn btn-orange">Sign Up</button></Link> */}
-
-							{!isSigningUp &&
-								<button className="btn btn-orange" onClick={onLoginClick} default>Login</button>}
-
-							{isSigningUp &&
-								<button className="btn btn-red" onClick={onCancelClick}>Cancel</button>
-							}
-
-							<button className="btn btn-blue" onClick={onSignUpClick} disabled={isSigningUp && disabled}>Sign up</button>
+						<div className="login-tos">
+							<label>
+								<input type="checkbox" name="tosAgree" data-testid="tosAgree" value={formValues.tosAgree} onChange={handleChange} />
+								I agree to the terms of service.
+							</label>
 						</div>
-					</form>
+					</>
+				}
+
+				{loginError &&
+					<div className="error-msg-box">
+						{loginError}
+					</div>
+				}
+
+				<div className="login-buttons">
+					{/* <Link to="/signup"><button className="btn btn-orange">Sign Up</button></Link> */}
+
+					{!isSigningUp &&
+						<button className="btn btn-orange" onClick={onLoginClick} default>Login</button>}
+
+					{isSigningUp &&
+						<button className="btn btn-red" onClick={onCancelClick}>Cancel</button>
+					}
+
+					<button className="btn btn-blue" onClick={onSignUpClick} disabled={isSigningUp && disabled}>Sign up</button>
+				</div>
+			</form>
+
+					<LoadingIndicator/>
+
 		</LoginContainer>
 	)
 }
