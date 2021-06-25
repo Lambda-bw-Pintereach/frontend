@@ -4,6 +4,7 @@ import { useState } from "react";
 import { axiosWithAuth } from "../utils/axiosWithAuth";
 
 export const PintereachApi = () => {
+	console.log("PINTEREACH API CALL")
 
 	const api = {};
 	const [isLoading, setIsLoading] = useState(false);
@@ -25,8 +26,23 @@ export const PintereachApi = () => {
 	}
 
 	api.fetchArticles = function () {
-		return this._wrap(() => axiosWithAuth().get("/articles"));
-	}
+		return new Promise(async (resolve, reject) => {
+			this._setIsLoading(true);
+
+			try {
+				const response = await axiosWithAuth().get("/articles");
+				resolve(response.data);
+			}
+
+			catch (error) {
+				reject(error);
+			}
+
+			finally {
+				setIsLoading(false);
+			}
+		});
+	};
 
 	api.saveArticle = function (article) {
 		return this._wrap(() => axiosWithAuth().post("/article", article));

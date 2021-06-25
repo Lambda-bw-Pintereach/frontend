@@ -1,4 +1,4 @@
-import React, { createContext } from 'react';
+import React, { createContext, useState } from 'react';
 import { Switch } from "react-router-dom";
 
 import { AppContainer, Landing } from './App.style';
@@ -14,8 +14,8 @@ export const LoadingContext = createContext({});
 
 function App() {
   // const [isLoading, setIsLoading] = useState(false);
-  // const [api, setApi] = useState(new PintereachApi(setIsLoading));
-  const api = PintereachApi();
+  const [api] = useState(PintereachApi());
+  //const api = PintereachApi();
 
   return (
     <ApiContext.Provider value={{ api }}>

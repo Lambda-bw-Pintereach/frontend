@@ -34,6 +34,15 @@ const DashContainer = styled.div`
 		}
 	}
 
+	.dash-cont {
+		display: flex;
+		justify-content: space-between;
+	}
+
+	.favouriteArticles {
+		width: 30%;
+	}
+
 	.dash-article-list {
 		display: flex;
 		flex-direction: row;

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link, Route, Switch, useHistory } from 'react-router-dom';
 
 import DashContainer from './Dash.style';
@@ -6,28 +6,28 @@ import DashContainer from './Dash.style';
 import SaveArticle from './SaveArticle';
 import ArticleList from './ArticleList';
 import Article from './Article';
+import { ApiContext } from '../App';
 
 
 const Dash = (props) => {
+	const { api } = useContext(ApiContext);
+	const [articles, setArticles] = useState([]);
 	const history = useHistory();
 
 	const logOut = () => {
-		// axiosWithAuth().post('/logout')
-		// 	.then(() => {
-		// 		localStorage.removeItem("token");
-		// 		history.push('/');
-		// 	})
-		// 	.catch(err => {
-		// 		console.log(err);
-		// 	})
-
 		localStorage.removeItem("token");
 		history.push('/');
 	};
 
+	useEffect(() => {
+		api.fetchArticles()
+			.then(res => {
+				setArticles(res);
+			});
+	}, [api])
+
 	return (
 		<DashContainer>
-
 			<div className="dash-background"></div>
 
 			<div className="dash-header">
@@ -43,7 +43,7 @@ const Dash = (props) => {
 				<Switch>
 
 					<Route path='/dash' exact>
-						<ArticleList />
+						<ArticleList articles={articles} />
 					</Route>
 
 					<Route path='/dash/savearticle' exact>
