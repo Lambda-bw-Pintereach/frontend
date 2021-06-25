@@ -10,7 +10,7 @@ const LoadingIndicator = props => {
 		return (
 			<div className={fill ? "loading-indicator-fill" : "loading-indicator"}>
 
-				<Puff color={color ?? "white"} size={50} loading={isLoading} rest />
+				<Puff color={color ?? "white"} size={50} loading={isLoading} {...rest} />
 
 			</div>
 		);

@@ -7,19 +7,20 @@ import './App.css';
 import PrivateRoute from './components/PrivateRoute';
 import Login from './components/Login';
 import Dash from './components/Dash';
-import { PintereachApi } from './api';
+import pintereachApi from './api';
 
 export const ApiContext = createContext({});
 export const LoadingContext = createContext({});
 
 function App() {
-  // const [isLoading, setIsLoading] = useState(false);
-  const [api] = useState(PintereachApi());
+  const [isLoading, setIsLoading] = useState(false);
+  const [api] = useState(pintereachApi);
+  api.init(setIsLoading);
   //const api = PintereachApi();
 
   return (
     <ApiContext.Provider value={{ api }}>
-      {/* <LoadingContext.Provider value={{ isLoading }}> */}
+      <LoadingContext.Provider value={{ isLoading }}>
 
         <AppContainer>
           <Switch>
@@ -38,7 +39,7 @@ function App() {
           </Switch>
         </AppContainer>
 
-      {/* </LoadingContext.Provider> */}
+      </LoadingContext.Provider>
     </ApiContext.Provider>
   );
 }
