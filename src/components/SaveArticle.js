@@ -184,7 +184,7 @@ const SaveArticle = props => {
 						</div>
 					</form>
 
-				<LoadingIndicator color="white" fill/>
+				<LoadingIndicator color="white" type="fill"/>
 
 			</SaveArticleContainer>
 		</>

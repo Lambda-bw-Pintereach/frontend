@@ -1,88 +1,93 @@
 
 import axios from "axios";
-import { useState } from "react";
 import { axiosWithAuth } from "../utils/axiosWithAuth";
 
-export const PintereachApi = () => {
+
+const PintereachApi = () => {
+	console.log("PINTEREACH API CALL")
 
 	const api = {};
-	const [isLoading, setIsLoading] = useState(false);
 
-	api._isLoading = isLoading;
-	api._setIsLoading = setIsLoading;
+	api._setIsLoading = () => { };
+	api._setArticles = () => { };
 
+	api.init = function (setIsLoading, setArticles) {
+		api._setIsLoading = setIsLoading;
+		api._setArticles = setArticles;
+	}
 
 	api.login = function (user) {
-		return this._wrap(() => axios.post('https://lambda-ft-pintereach-05.herokuapp.com/api/auth/login', user)
+		return this._wrapCall(() => axios.post('https://lambda-ft-pintereach-05.herokuapp.com/api/auth/login', user))
 			.then(res => {
 				localStorage.setItem("token", res.data.token);
 				return res;
-			}));
+			});
 	}
 
 	api.signUp = function (user) {
-		return this._wrap(() => axios.post('https://lambda-ft-pintereach-05.herokuapp.com/api/auth/register', user));
+		return this._wrapCall(() => axios.post('https://lambda-ft-pintereach-05.herokuapp.com/api/auth/register', user));
 	}
 
+	/**
+	 * Fetches the articles list from the api
+	 * Consumers should use:
+	 * {api, articles } = useContext(ApiContext))
+	 * api.refreshArticles()
+	 * @returns the HTTP response object
+	 */
 	api.fetchArticles = function () {
-		return this._wrap(() => axiosWithAuth().get("/articles"));
-	}
+		return this._wrapCall(() => axiosWithAuth().get("/articles"));
+	};
+
+	api.refreshArticles = function () {
+		return this._wrapCall(() => {
+			return axiosWithAuth().get("/articles")
+				.then(res => {
+					this._setArticles(res.data);
+					return res;
+				});
+		});
+	};
 
 	api.saveArticle = function (article) {
-		return this._wrap(() => axiosWithAuth().post("/article", article));
+		return this._wrapCall(() => axiosWithAuth().post("/article", article).then((res) => this.refreshArticles()));
 	}
 
 	api.fetchArticle = function (article_id) {
-		return this._wrap(() => axiosWithAuth().get(`article/${article_id}`));
+		return this._wrapCall(() => axiosWithAuth().get(`article/${article_id}`));
 	}
 
 	api.deleteArticle = function (article_id) {
-		return this._wrap(() => axiosWithAuth().delete(`article/${article_id}`));
+		return this._wrapCall(() => axiosWithAuth().delete(`article/${article_id}`).then((res) => this.refreshArticles()));
 	}
 
-	api._wrap = function (func) {
-		this._setIsLoading(true);
+	api._wrapCall = function (apiCall) {
+		return new Promise(async (resolve, reject) => {
+			this._setIsLoading(true);
 
-		// return new Promise((resolve, reject) => {
-		// 	setTimeout(() => {
-		// 		func()
-		// 			.then(res => {
-		// 				this._setIsLoading(false);
-		// 				resolve(res);
-		// 			})
-		// 			.catch(err => {
-		// 				this._setIsLoading(false);
-		// 				reject(err);
-		// 			})
-		// 	}, 1000);
-		// });
+			try {
+				const response = await apiCall();
+				resolve(response);
+			}
 
-		return func()
-			.then(res => {
+			catch (error) {
+				reject(error);
+			}
+
+			finally {
 				this._setIsLoading(false);
-				return res;
-			})
-			.catch(err => {
-				this._setIsLoading(false);
-				throw err;
-			})
-	}
+			}
+		});
+	};
 
 	return api;
 }
 
-// export function fetchArticles() {
-// 	return axiosWithAuth().get("/articles");
-// }
+/**
+ * Only App.js should be importing this!
+ * Any other component should be using useContext(ApiContext)!
+ *
+ *  @type {*} */
+const api = PintereachApi();
 
-// export function saveArticle(article) {
-// 	return axiosWithAuth().post("/article", article);
-// }
-
-// export function fetchArticle(article_id) {
-// 	return axiosWithAuth().get(`article/${article_id}`);
-// }
-
-// export function deleteArticle(article_id) {
-// 	return axiosWithAuth().delete(`article/${article_id}`);
-// }
+export default api;
