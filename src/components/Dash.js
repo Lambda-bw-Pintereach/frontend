@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Link, Route, Switch, useHistory } from 'react-router-dom';
+import { Link, Route, Switch, useHistory, useParams } from 'react-router-dom';
 
 import DashContainer from './Dash.style';
 
@@ -10,8 +10,8 @@ import { ApiContext } from '../App';
 
 
 const Dash = (props) => {
-	const { api } = useContext(ApiContext);
-	const [articles, setArticles] = useState([]);
+	const { api, articles } = useContext(ApiContext);
+	//const [articles, setArticles] = useState([]);
 	const history = useHistory();
 
 	const logOut = () => {
@@ -20,10 +20,11 @@ const Dash = (props) => {
 	};
 
 	useEffect(() => {
-		api.fetchArticles()
-			.then(res => {
-				setArticles(res);
-			});
+		// api.fetchArticles()
+		// 	.then(res => {
+		// 		setArticles(res.data);
+		// 	});
+		api.refreshArticles();
 	}, [api])
 
 	return (
@@ -51,7 +52,7 @@ const Dash = (props) => {
 					</Route>
 
 					<Route path='/dash/article/:id' exact>
-						<Article />
+									<Article />
 					</Route>
 
 				</Switch>

@@ -15,11 +15,11 @@ export const LoadingContext = createContext({});
 function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [api] = useState(pintereachApi);
-  api.init(setIsLoading);
-  //const api = PintereachApi();
+  const [articles, setArticles] = useState([]);
+  api.init(setIsLoading, setArticles);
 
   return (
-    <ApiContext.Provider value={{ api }}>
+    <ApiContext.Provider value={{ api, articles }}>
       <LoadingContext.Provider value={{ isLoading }}>
 
         <AppContainer>

@@ -1,30 +1,36 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
+
 import { ApiContext } from '../App';
+
 import deleteIcon from '../images/trash.svg';
 import backIcon from '../images/undo-arrow.svg';
 import LoadingIndicator from './LoadingIndicator';
 
+const emptyArticle = {
+	title: "",
+	preview: "",
+	story: "",
+	category: [],
+	article_id: 0
+};
+
 const Article = props => {
 	const { id } = useParams();
 	const history = useHistory();
-	const { api } = useContext(ApiContext);
-	const [article, setArticle] = useState({
-		title: "",
-		preview: "",
-		story: "",
-		category: [],
-		article_id: 0
-	});
+	const { api, articles } = useContext(ApiContext);
+
+	//const [article, setArticle] = useState(articles.find(art => art.article_id === parseInt(id)) ?? emptyArticle);
+	const article = articles.find(art => art.article_id === parseInt(id)) ?? emptyArticle
 	const [isConfirmDelete, setIsConfirmDelete] = useState(false);
 
-	useEffect(() => {
-		api.fetchArticle(id)
-			.then(res => {
-				setArticle(res.data);
-			})
-			.catch(err => console.log(err));
-	})
+	// useEffect(() => {
+	// 	api.fetchArticle(id)
+	// 		.then(res => {
+	// 			setArticle(res.data);
+	// 		})
+	// 		.catch(err => console.log(err));
+	// })
 
 	const deleteConfirm = (e) => {
 		e.preventDefault();

@@ -1,18 +1,19 @@
 
 import axios from "axios";
-import { useState } from "react";
 import { axiosWithAuth } from "../utils/axiosWithAuth";
+
 
 const PintereachApi = () => {
 	console.log("PINTEREACH API CALL")
 
 	const api = {};
-	//const [isLoading, setIsLoading] = useState(false);
 
 	api._setIsLoading = () => { };
+	api._setArticles = () => { };
 
-	api.init = function (setIsLoading) {
+	api.init = function (setIsLoading, setArticles) {
 		api._setIsLoading = setIsLoading;
+		api._setArticles = setArticles;
 	}
 
 	api.login = function (user) {
@@ -27,24 +28,25 @@ const PintereachApi = () => {
 		return this._wrapCall(() => axios.post('https://lambda-ft-pintereach-05.herokuapp.com/api/auth/register', user));
 	}
 
+	/**
+	 * Fetches the articles list from the api
+	 * Consumers should use:
+	 * {api, articles } = useContext(ApiContext))
+	 * api.refreshArticles()
+	 * @returns the HTTP response object
+	 */
 	api.fetchArticles = function () {
 		return this._wrapCall(() => axiosWithAuth().get("/articles"));
-		// return new Promise(async (resolve, reject) => {
-		// 	this._setIsLoading(true);
+	};
 
-		// 	try {
-		// 		const response = await axiosWithAuth().get("/articles");
-		// 		resolve(response.data);
-		// 	}
-
-		// 	catch (error) {
-		// 		reject(error);
-		// 	}
-
-		// 	finally {
-		// 		this._setIsLoading(false);
-		// 	}
-		// });
+	api.refreshArticles = function () {
+		return this._wrapCall(() => {
+			return axiosWithAuth().get("/articles")
+				.then(res => {
+					this._setArticles(res.data);
+					return res;
+				});
+		});
 	};
 
 	api.saveArticle = function (article) {
@@ -81,21 +83,11 @@ const PintereachApi = () => {
 	return api;
 }
 
-export const api = PintereachApi();
+/**
+ * Only App.js should be importing this!
+ * Any other component should be using useContext(ApiContext)!
+ *
+ *  @type {*} */
+const api = PintereachApi();
+
 export default api;
-
-// export function fetchArticles() {
-// 	return axiosWithAuth().get("/articles");
-// }
-
-// export function saveArticle(article) {
-// 	return axiosWithAuth().post("/article", article);
-// }
-
-// export function fetchArticle(article_id) {
-// 	return axiosWithAuth().get(`article/${article_id}`);
-// }
-
-// export function deleteArticle(article_id) {
-// 	return axiosWithAuth().delete(`article/${article_id}`);
-// }
