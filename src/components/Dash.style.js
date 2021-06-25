@@ -76,61 +76,6 @@ const DashContainer = styled.div`
 		outline-offset: 2px;
 	}
 
-	.dash-article-full {
-		display: flex;
-		flex-direction: row;
-	}
-
-	.dash-article-content {
-		background: #00000022;
-		margin: 1rem;
-		padding: 1rem;
-		position: relative;
-		box-shadow: 1px 1px 15px 2px #00000055;
-		flex-grow: 1;
-
-		h5 {
-			font-size: 3rem;
-			margin: 0em;
-		}
-	}
-
-	.dash-article-buttons {
-		display: flex;
-		flex-direction: column;
-		flex-grow: 0;
-		margin-top: 1rem;
-		padding-top: 1rem;
-
-		img {
-			width: 1.8rem;
-			height: 1.8rem;
-			border-radius: .5rem;
-			padding: .2rem;
-			background-color: #cccccc;
-			border: 1px solid black;
-			margin: .5rem 0rem;
-		}
-	}
-
-	.btn-delete:hover {
-		background-color: #e55e5d !important;
-	}
-
-.btn-back:hover {
-		background-color: #6c768b !important;
-	}
-
-	.dash-article-sidebar {
-		margin: 1rem;
-		padding: 1rem;
-		position: relative;
-		box-shadow: 1px 1px 15;
-		border: 1px solid black;
-		width: 10rem;
-		flex-shrink: 0;
-	}
-
 	.loading-blur {
 		position: absolute;
 		top: 0;

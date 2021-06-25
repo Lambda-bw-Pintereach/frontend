@@ -50,7 +50,7 @@ const PintereachApi = () => {
 	};
 
 	api.saveArticle = function (article) {
-		return this._wrapCall(() => axiosWithAuth().post("/article", article));
+		return this._wrapCall(() => axiosWithAuth().post("/article", article).then((res) => this.refreshArticles()));
 	}
 
 	api.fetchArticle = function (article_id) {
@@ -58,7 +58,7 @@ const PintereachApi = () => {
 	}
 
 	api.deleteArticle = function (article_id) {
-		return this._wrapCall(() => axiosWithAuth().delete(`article/${article_id}`));
+		return this._wrapCall(() => axiosWithAuth().delete(`article/${article_id}`).then((res) => this.refreshArticles()));
 	}
 
 	api._wrapCall = function (apiCall) {

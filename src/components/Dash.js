@@ -11,7 +11,6 @@ import { ApiContext } from '../App';
 
 const Dash = (props) => {
 	const { api, articles } = useContext(ApiContext);
-	//const [articles, setArticles] = useState([]);
 	const history = useHistory();
 
 	const logOut = () => {
@@ -20,12 +19,8 @@ const Dash = (props) => {
 	};
 
 	useEffect(() => {
-		// api.fetchArticles()
-		// 	.then(res => {
-		// 		setArticles(res.data);
-		// 	});
 		api.refreshArticles();
-	}, [api])
+	}, [api]);
 
 	return (
 		<DashContainer>
@@ -52,7 +47,7 @@ const Dash = (props) => {
 					</Route>
 
 					<Route path='/dash/article/:id' exact>
-									<Article />
+						<Article />
 					</Route>
 
 				</Switch>
