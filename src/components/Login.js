@@ -216,7 +216,7 @@ const Login = () => {
 				</div>
 			</form>
 
-					<LoadingIndicator/>
+					<LoadingIndicator hold/>
 
 		</LoginContainer>
 	)

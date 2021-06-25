@@ -1,4 +1,4 @@
-import React, { createContext } from 'react';
+import React, { createContext, useState } from 'react';
 import { Switch } from "react-router-dom";
 
 import { AppContainer, Landing } from './App.style';
@@ -7,19 +7,20 @@ import './App.css';
 import PrivateRoute from './components/PrivateRoute';
 import Login from './components/Login';
 import Dash from './components/Dash';
-import { PintereachApi } from './api';
+import pintereachApi from './api';
 
 export const ApiContext = createContext({});
 export const LoadingContext = createContext({});
 
 function App() {
-  // const [isLoading, setIsLoading] = useState(false);
-  // const [api, setApi] = useState(new PintereachApi(setIsLoading));
-  const api = PintereachApi();
+  const [isLoading, setIsLoading] = useState(false);
+  const [api] = useState(pintereachApi);
+  const [articles, setArticles] = useState([]);
+  api.init(setIsLoading, setArticles);
 
   return (
-    <ApiContext.Provider value={{ api }}>
-      {/* <LoadingContext.Provider value={{ isLoading }}> */}
+    <ApiContext.Provider value={{ api, articles }}>
+      <LoadingContext.Provider value={{ isLoading }}>
 
         <AppContainer>
           <Switch>
@@ -38,7 +39,7 @@ function App() {
           </Switch>
         </AppContainer>
 
-      {/* </LoadingContext.Provider> */}
+      </LoadingContext.Provider>
     </ApiContext.Provider>
   );
 }

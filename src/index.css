@@ -1,6 +1,6 @@
 * {
   /* box-sizing: border-box; */
-  border: 1px solid red;
+  /* border: 1px solid red; */
 }
 
 body {
@@ -27,11 +27,4 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
-}
-.articleDashboard{
-  display: flex;
-  justify-content: space-between;
-}
-.favouriteArticles{
-  width: 30%;
 }
