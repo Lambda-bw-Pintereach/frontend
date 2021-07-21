@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 const ArticleCardContainer = styled.div`
-	width: 90%;
+	width: 40%;
 	background: #00000011;
 	margin: 1rem;
 	padding: 1rem;

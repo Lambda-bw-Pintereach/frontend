@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import styled from 'styled-components';
 import LinkPreviewCard from './link-preview-card';
 
 const ArticlePreviewTest = () => {

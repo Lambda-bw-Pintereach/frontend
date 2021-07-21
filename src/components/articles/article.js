@@ -7,6 +7,8 @@ import deleteIcon from '../../images/trash.svg';
 import backIcon from '../../images/undo-arrow.svg';
 import ArticleContainer from './article.style';
 import LoadingIndicator from '../loading-indicator';
+import ArticleList from './article-list';
+import ArticleLink from './article-link';
 
 /**
  * Full page view of an article
@@ -50,8 +52,8 @@ const Article = props => {
 							<h5>{article.title}</h5>
 						</a>
 						{/* <p>{article.story}</p> */}
-						{article.story.split('\n').map(p => (
-							<p>{p}</p>
+						{article.story.split('\n').map((p, i) => (
+							<p key={i}>{p}</p>
 						))}
 
 						<LoadingIndicator type="fill" />
@@ -76,7 +78,7 @@ const Article = props => {
 					}
 				</div>
 
-				<div className="dash-article-sidebar">
+				{/* <div className="dash-article-sidebar">
 					{articles.map(art => {
 						return (
 							<div key={art.article_id}>
@@ -84,7 +86,9 @@ const Article = props => {
 								</div>
 						);
 					})}
-				</div>
+				</div> */}
+
+				<ArticleList articles={articles} itemComponent={ArticleLink} className="dash-article-sidebar" />
 
 			</ArticleContainer>
 		</>

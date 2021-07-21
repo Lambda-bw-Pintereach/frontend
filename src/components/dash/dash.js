@@ -5,9 +5,10 @@ import DashContainer from './dash.style';
 
 import Article from '../articles/article';
 import ArticleList from '../articles/article-list';
-import SaveArticle from '../articles/save-article';
+import SaveArticle, { categories } from '../articles/save-article';
 
 import { ApiContext } from '../../app';
+import ArticleCard from '../articles/article-card';
 
 
 const Dash = (props) => {
@@ -28,7 +29,7 @@ const Dash = (props) => {
 			<div className="dash-background"></div>
 
 			<div className="dash-header">
-				<h1>Pintereach</h1>
+				<h1>pintereach</h1>
 				<nav>
 					<Link to="/dash">Home</Link>
 					<Link to="/dash/savearticle">Add Article</Link>
@@ -40,7 +41,17 @@ const Dash = (props) => {
 				<Switch>
 
 					<Route path='/dash' exact>
-						<ArticleList articles={articles} />
+						<div className="dash-section-header">
+							<h3>Your Saved Articles</h3>
+							{/* <select>
+								{["Show All", ...categories].map((cat, i) => {
+									return (
+										<option key={i}>{cat}</option>
+									);
+								})}
+							</select> */}
+						</div>
+						<ArticleList articles={articles} itemComponent={ArticleCard} className="dash-article-list"/>
 					</Route>
 
 					<Route path='/dash/savearticle' exact>

@@ -95,7 +95,7 @@ const PintereachApi = () => {
  * Only App.js should be importing this!
  * Any other component should be using useContext(ApiContext)!
  *
- *  @type {*} */
+ */
 const api = PintereachApi();
 
 export default api;

@@ -2,10 +2,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import ArticleCard from './article-card';
-import { categories } from './save-article';
-import articleShape from './article-shape';
-
 
 /**
  * Renders a list of articles
@@ -15,32 +11,22 @@ import articleShape from './article-shape';
  * @param {ArticleListProps} props.articles - an array of article data
  */
 const ArticleList = props => {
-	const { articles } = props;
+	const { articles, className } = props;
 	const Item = props.itemComponent;
 
 	return (
 		<>
-			<div className="dash-section-header">
-				<h3>Your Saved Articles</h3>
-				<select>
-					{["Show All", ...categories].map((cat, i) => {
-						return (
-							<option key={i}>{cat}</option>
-						);
-					})}
-				</select>
-			</div>
-
-			<div className="dash-article-list">
-				{articles && articles.map((art) => <ArticleCard art={art} key={art.article_id}/>)}
+			<div className={className || ""}>
+				{articles && articles.map((art) => <Item article={art} key={art.article_id}/>)}
 			</div>
 		</>
 	);
 }
 
 ArticleList.propTypes = {
-	itemComponent: PropTypes.element,
-	articles: PropTypes.arrayOf(PropTypes.shape(articleShape))
+	itemComponent: PropTypes.elementType,
+	articles: PropTypes.array,
+	className: PropTypes.string
 }
 
 export default ArticleList;

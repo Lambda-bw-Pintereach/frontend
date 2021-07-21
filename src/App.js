@@ -31,7 +31,7 @@ function App() {
 
             <Landing>
               <div className="landing-background"></div>
-              <h1>Pintereach</h1>
+              <h1>pintereach</h1>
               <h2>collect your [...]</h2>
               <Login />
             </Landing>
