@@ -8,7 +8,7 @@ const urls = {
 	login: `${API_URL}/auth/login`,
 	register: `${API_URL}/auth/register`,
 	articles: `${API_URL}/articles`,
-	article: (article_id) => `${API_URL}/article/${article_id}`,
+	article: (article_id) => `${API_URL}/articles/${article_id}`,
 }
 
 const PintereachApi = () => {
