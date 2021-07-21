@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import LinkPreviewCard from './LinkPreviewCard';
+import LinkPreviewCard from './link-preview-card';
 
 const ArticlePreviewTest = () => {
 	const [url, setUrl] = useState("");

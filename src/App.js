@@ -1,12 +1,12 @@
 import React, { createContext, useState } from 'react';
 import { Switch } from "react-router-dom";
 
-import { AppContainer, Landing } from './App.style';
-import './App.css';
+import { AppContainer, Landing } from './app.style';
+import './app.css';
 
-import PrivateRoute from './components/PrivateRoute';
-import Login from './components/Login';
-import Dash from './components/Dash';
+import PrivateRoute from './components/private-route';
+import Login from './components/landing/login';
+import Dash from './components/dash/dash';
 import pintereachApi from './api';
 
 export const ApiContext = createContext({});

@@ -7,6 +7,6 @@ export const axiosWithAuth = () => {
         headers: {
             authorization: token
         },
-        baseURL: 'https://lambda-ft-pintereach-05.herokuapp.com/api'
+        // baseURL: process.env.API_URL
     });
 }

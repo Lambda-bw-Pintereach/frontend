@@ -1,11 +1,11 @@
 import React, { useContext, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { isValidUrl } from '../utils/helpers';
-import fetchPreview from '../utils/linkPreview';
-import SaveArticleContainer from './SaveArticle.style';
-import LinkPreviewCard from './LinkPreviewCard';
-import LoadingIndicator from './LoadingIndicator';
-import { ApiContext } from '../App';
+import { isValidUrl } from '../../utils/helpers';
+import fetchPreview from '../../utils/linkPreview';
+import SaveArticleContainer from './save-article.style';
+import LinkPreviewCard from '../link-preview/link-preview-card';
+import LoadingIndicator from '../loading-indicator';
+import { ApiContext } from '../../app';
 
 const emptyFormValues = {
 	title: "",
@@ -35,6 +35,7 @@ const SaveArticle = props => {
 	const [linkPreview, setLinkPreview] = useState(null);
 	const [previewTimeout, setPreviewTimeout] = useState(null);
 	const [error, setError] = useState("");
+	const [disableSubmit, setDisableSubmit] = useState(false);
 	const { api } = useContext(ApiContext);
 
 	const history = useHistory();
@@ -88,6 +89,8 @@ const SaveArticle = props => {
 			url: formValues.url
 		}
 
+		setDisableSubmit(true);
+
 		api.saveArticle(article)
 			.then(res => {
 				history.push('/dash')
@@ -95,6 +98,7 @@ const SaveArticle = props => {
 			.catch(err => {
 				console.log(err);
 				setError("An error occured. Please refresh and try again.")
+				setDisableSubmit(false);
 			});
 	}
 
@@ -180,7 +184,7 @@ const SaveArticle = props => {
 					}
 
 						<div>
-						<input type="submit" value="Submit" disabled={error}/>
+						<input type="submit" value="Submit" disabled={disableSubmit}/>
 						</div>
 					</form>
 

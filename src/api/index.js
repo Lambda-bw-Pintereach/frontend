@@ -2,6 +2,14 @@
 import axios from "axios";
 import { axiosWithAuth } from "../utils/axiosWithAuth";
 
+const API_URL = 'https://blooming-lowlands-48493.herokuapp.com/api'
+
+const urls = {
+	login: `${API_URL}/auth/login`,
+	register: `${API_URL}/auth/register`,
+	articles: `${API_URL}/articles`,
+	article: (article_id) => `${API_URL}/article/${article_id}`,
+}
 
 const PintereachApi = () => {
 	console.log("PINTEREACH API CALL")
@@ -17,7 +25,7 @@ const PintereachApi = () => {
 	}
 
 	api.login = function (user) {
-		return this._wrapCall(() => axios.post('https://lambda-ft-pintereach-05.herokuapp.com/api/auth/login', user))
+		return this._wrapCall(() => axios.post(urls.login, user))
 			.then(res => {
 				localStorage.setItem("token", res.data.token);
 				return res;
@@ -25,7 +33,7 @@ const PintereachApi = () => {
 	}
 
 	api.signUp = function (user) {
-		return this._wrapCall(() => axios.post('https://lambda-ft-pintereach-05.herokuapp.com/api/auth/register', user));
+		return this._wrapCall(() => axios.post(urls.register, user));
 	}
 
 	/**
@@ -36,12 +44,12 @@ const PintereachApi = () => {
 	 * @returns the HTTP response object
 	 */
 	api.fetchArticles = function () {
-		return this._wrapCall(() => axiosWithAuth().get("/articles"));
+		return this._wrapCall(() => axiosWithAuth().get(urls.articles));
 	};
 
 	api.refreshArticles = function () {
 		return this._wrapCall(() => {
-			return axiosWithAuth().get("/articles")
+			return axiosWithAuth().get(urls.articles)
 				.then(res => {
 					this._setArticles(res.data);
 					return res;
@@ -50,15 +58,15 @@ const PintereachApi = () => {
 	};
 
 	api.saveArticle = function (article) {
-		return this._wrapCall(() => axiosWithAuth().post("/article", article).then((res) => this.refreshArticles()));
+		return this._wrapCall(() => axiosWithAuth().post(urls.articles, article).then((res) => this.refreshArticles()));
 	}
 
 	api.fetchArticle = function (article_id) {
-		return this._wrapCall(() => axiosWithAuth().get(`article/${article_id}`));
+		return this._wrapCall(() => axiosWithAuth().get(urls.article(article_id)));
 	}
 
 	api.deleteArticle = function (article_id) {
-		return this._wrapCall(() => axiosWithAuth().delete(`article/${article_id}`).then((res) => this.refreshArticles()));
+		return this._wrapCall(() => axiosWithAuth().delete(urls.article(article_id)).then((res) => this.refreshArticles()));
 	}
 
 	api._wrapCall = function (apiCall) {

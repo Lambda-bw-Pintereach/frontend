@@ -1,14 +1,21 @@
 import React, { useContext, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 
-import { ApiContext } from '../App';
+import { ApiContext } from '../../app';
 
-import deleteIcon from '../images/trash.svg';
-import backIcon from '../images/undo-arrow.svg';
-import ArticleContainer from '../style/Article.style';
-import LoadingIndicator from './LoadingIndicator';
+import deleteIcon from '../../images/trash.svg';
+import backIcon from '../../images/undo-arrow.svg';
+import ArticleContainer from './article.style';
+import LoadingIndicator from '../loading-indicator';
 
-
+/**
+ * Full page view of an article
+ * This is the primary content for route "dash/article/id"
+ *
+ * Article must have a matching id in the articles context
+ *
+ * An error will be displayed for an invalid id
+ */
 const Article = props => {
 	const { api, articles } = useContext(ApiContext);
 	const [isConfirmDelete, setIsConfirmDelete] = useState(false);
@@ -25,7 +32,6 @@ const Article = props => {
 	const onConfirm = (del) => {
 		if (del) {
 			api.deleteArticle(article.article_id)
-				// .then(res => api.refreshArticles())
 				.then(res => history.push("/dash"))
 				.catch(err => console.log(err));
 		}
@@ -37,14 +43,16 @@ const Article = props => {
 	return (
 		<>
 			<ArticleContainer>
-
 				{article
 					? // Article Content
 					<div className="dash-article-content">
 						<a href={`/dash/article/${article.article_id}`} className="article-card-link">
 							<h5>{article.title}</h5>
 						</a>
-						<p>{article.story}</p>
+						{/* <p>{article.story}</p> */}
+						{article.story.split('\n').map(p => (
+							<p>{p}</p>
+						))}
 
 						<LoadingIndicator type="fill" />
 					</div>

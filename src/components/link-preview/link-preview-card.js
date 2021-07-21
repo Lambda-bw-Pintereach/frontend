@@ -1,8 +1,8 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { isValidUrl } from '../utils/helpers';
-import fetchPreview from '../utils/linkPreview';
+import { isValidUrl } from '../../utils/helpers';
+import fetchPreview from '../../utils/linkPreview';
 
 const emptyPreview = {
 	title: "",

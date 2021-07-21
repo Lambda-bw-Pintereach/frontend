@@ -1,12 +1,13 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { Link, Route, Switch, useHistory, useParams } from 'react-router-dom';
+import React, { useContext, useEffect } from 'react';
+import { Link, Route, Switch, useHistory } from 'react-router-dom';
 
-import DashContainer from './Dash.style';
+import DashContainer from './dash.style';
 
-import SaveArticle from './SaveArticle';
-import ArticleList from './ArticleList';
-import Article from './Article';
-import { ApiContext } from '../App';
+import Article from '../articles/article';
+import ArticleList from '../articles/article-list';
+import SaveArticle from '../articles/save-article';
+
+import { ApiContext } from '../../app';
 
 
 const Dash = (props) => {

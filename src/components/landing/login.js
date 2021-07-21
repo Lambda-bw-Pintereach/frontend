@@ -1,11 +1,11 @@
 import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
 import { useHistory, Link } from 'react-router-dom';
-import LoginContainer from "./Login.style"
+import LoginContainer from "./login.style"
 import * as yup from 'yup';
-import formSchema from '../utils/formSchema';
-import { ApiContext } from "../App";
-import LoadingIndicator from "./LoadingIndicator";
+import formSchema from '../../utils/formSchema';
+import { ApiContext } from "../../app";
+import LoadingIndicator from "../loading-indicator";
 
 
 const emptyLogin = {

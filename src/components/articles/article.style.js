@@ -15,7 +15,6 @@ const ArticleContainer = styled.div`
 		margin: 1rem;
 		padding: 1rem;
 		position: relative;
-		box-shadow: 1px 1px 15px 2px #00000055;
 		flex-grow: 1;
 
 		h5 {
@@ -54,14 +53,29 @@ const ArticleContainer = styled.div`
 
 	.dash-article-sidebar {
 		margin: 1rem;
-		padding: 1rem;
+		padding: 0rem;
 		position: relative;
 		box-shadow: 1px 1px 15;
-		border: 1px solid black;
-		width: 10rem;
+		border: 0px solid black;
+		width: 12rem;
 		flex-shrink: 0;
 
 		/* background: #0000FF22; */
+
+		&>div {
+			background: #00000010;
+			font-size: 1.0rem;
+			margin: .1rem;
+			padding: .2rem .5rem;
+		}
+
+		a {
+			color: inherit;
+		}
+
+		a:visited {
+			color: inherit;
+		}
 	}
 `;
 

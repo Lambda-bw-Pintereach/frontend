@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { LoadingContext } from '../App';
+import { LoadingContext } from '../app';
 import Puff from 'react-spinners/PuffLoader';
 import styled from 'styled-components';
 

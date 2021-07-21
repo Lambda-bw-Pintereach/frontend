@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 const DashContainer = styled.div`
 	.dash-header {
-		background-color: ${p => p.theme.darkBackground};
+		background-color: ${p => p.theme.deepPurp};
 		padding: .2rem 11rem;
 
 		display: flex;
@@ -53,27 +53,6 @@ const DashContainer = styled.div`
 	.article-card-link {
 		text-decoration: none;
 		color: ${p => p.theme.onLight};
-	}
-
-	.dash-article-card {
-		width: 90%;
-		background: #00000022;
-		margin: 1rem;
-		padding: 1rem;
-		position: relative;
-		border-radius:10px;
-		box-shadow: 1px 1px 15px 2px #00000055;
-
-		h5 {
-			font-size: 3rem;
-			margin: 0em;
-		}
-	}
-
-	.dash-article-card:hover {
-		outline: 2px ${p => p.theme.deepPurp} solid;
-		border-color: transparent;
-		outline-offset: 2px;
 	}
 
 	.loading-blur {
